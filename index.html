@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PageGuide | Browser Extension for Grounded Web Assistance</title>
+    <meta
+      name="description"
+      content="PageGuide is a browser extension that grounds LLM answers directly in the HTML DOM, helping users find information, complete multi-step tasks, and filter distractions — with full in-situ verification."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+
+      <main id="home">
+        <section class="hero hero-centered">
+          <div class="hero-copy">
+            <h1>
+              <span class="hero-mark-inline">🍊</span> PageGuide: Browser Extension to Assist Users in Navigating a Webpage
+              and Locate Information
+            </h1>
+            <p class="hero-tagline">A browser extension that grounds LLM answers in a page directly<br>
+              
+              🖍️ highlights evidence, 🗺️ navigates step-by-step, 🙈 hides distractions, 📄 reads PDFs, and 👁️ answers visual questions (see <a href="#modes">Method and Examples</a>).</p>
+            <p class="hero-authors">Anonymous Authors</p>
+            <div class="hero-affiliations">
+              <p>Affiliations withheld for anonymous review</p>
+            </div>
+
+            <div class="hero-links hero-links-centered">
+              <a class="button hero-link" href="#overview">Abstract</a>
+              <a class="button hero-link" href="#motivation">Motivation</a>
+              <a class="button hero-link" href="#videos">Videos</a>
+              <a class="button hero-link" href="#modes">Method and Examples</a>
+              <a class="button hero-link" href="#results">User Study</a>
+              
+              <a class="button hero-link" href="#" target="_blank" rel="noreferrer">ArXiv</a>
+              <a class="button hero-link" href="#" target="_blank" rel="noreferrer">Chrome Extension</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="callout-grid" id="overview">
+          <h2 class="paper-section-title">Abstract</h2>
+          <article class="callout abstract-card abstract-card-full">
+            <p>
+              Users browsing the web daily struggle to locate relevant information
+              on cluttered pages, complete unfamiliar multi-step tasks, and stay
+              focused amid distracting content. State-of-the-art AI assistants
+              and browser agents return answers without showing where information
+              comes from, forcing users to manually verify results and blindly
+              trust every automated step.
+            </p>
+            <p>
+              We present <strong>🍊 PageGuide</strong>, a browser extension that
+              grounds LLM answers directly in the HTML DOM via visual overlays,
+              addressing three core user needs:
+            <ol class="abstract-list">
+              <li><strong>Find</strong> — locating and highlighting relevant evidence in-situ so users can instantly verify answers on the page;</li>
+              <li><strong>Guide</strong> — showing step-by-step instructions one at a time so users can follow and perform actions by themselves;</li>
+              <li><strong>Hide</strong> — hiding distracting content with a per-element justification and a reviewable checklist.</li>
+            </ol>
+            </p>
+            <p>
+              In a within-subject controlled user study (<em>N</em> = 94), PageGuide outperforms unaided browsing across all modes:
+              Hide accuracy improves by 26 percentage points and task time drops by 70%;
+              Guide completion rate increases by 30 percentage points;
+              and Find reduces Ctrl+F usage by 80% and task time by 19%.
+            </p>
+          </article>
+        </section>
+
+        <h2 class="paper-section-title" id="motivation">Motivation</h2>
+        <!-- Unified motivation carousel -->
+        <div class="carousel" id="failureCarousel">
+          <div class="carousel-viewport">
+          <div class="carousel-track">
+
+            <div class="carousel-slide">
+              <img src="figures/three_figures.png" class="paper-figure carousel-img" alt="Motivation: existing agents vs. PageGuide" />
+              <p class="figure-caption">
+                <strong>Figure 1:</strong>
+                (a) Existing web agents can fail in three ways: by providing answers that cannot be verified from the page, failing
+                to highlight relevant page elements, or failing to hide content requested by the user. On the Amazon River Wikipedia page,
+                <img src="figures/icons/gpt_atlas.png" class="caption-icon" alt="ChatGPT Atlas icon" /><b>ChatGPT Atlas</b> returns the correct answer, but it does not highlight the supporting evidence on the page, making the response
+                difficult for the user to verify. On TradingView, <img src="figures/icons/gpt_atlas.png" class="caption-icon" alt="ChatGPT Atlas icon" /><b>ChatGPT Atlas</b> explains how to move the price scale but does not highlight
+                the relevant Settings icon on the chart. On Threads, <img src="figures/icons/gemini3flash.png" class="caption-icon" alt="Gemini Agent icon" /><b>Gemini Agent</b> cannot directly hide negative comments about Ronaldo
+                on the page. (b) In contrast, given a query in the agent side panel on the right (powered by <img src="figures/icons/gemini3flash.png" class="caption-icon" alt="Gemini icon" />Gemini-3-Flash), 🍊 <b>PageGuide</b>
+                displays the full answer with clickable references that navigate to the corresponding highlighted evidence on the page
+                (<em>e.g.,</em> the page will jump to the location of the
+                <span class="caption-highlight-pink">Nevado Mismi</span>
+                when clicking at
+                <span class="caption-highlight-dark">Nevado Mismi<sup>[1]</sup></span>).
+              </p>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="figures/extension_failures/atlas.png" class="paper-figure carousel-img" alt="ChatGPT Atlas failure case" />
+              <p class="figure-caption"><strong>ChatGPT Atlas.</strong> Returns the correct answer but does not highlight the supporting evidence on the page, making the response difficult for the user to verify.</p>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="figures/extension_failures/atlas_youtube.png" class="paper-figure carousel-img" alt="ChatGPT Atlas on YouTube" />
+              <p class="figure-caption"><strong>ChatGPT Atlas (YouTube).</strong> Explains how to perform a task but does not highlight the relevant UI element on the page, leaving the user to locate it manually.</p>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="figures/extension_failures/browseruse.png" class="paper-figure carousel-img" alt="Browser Use failure case" />
+              <p class="figure-caption"><strong>Browser Use.</strong> Autonomously executes actions without showing where each step is performed on the page — users cannot verify or intervene at each stage.</p>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="figures/extension_failures/gemini_agent.png" class="paper-figure carousel-img" alt="Gemini Agent failure case" />
+              <p class="figure-caption"><strong>Gemini Agent.</strong> Cannot directly hide specific content requested by the user; the page remains unchanged after the request.</p>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="figures/extension_failures/molmo_web.png" class="paper-figure carousel-img" alt="Molmo Web failure case" />
+              <p class="figure-caption"><strong>Molmo Web.</strong> Points to a location on the page but does not ground the answer in the actual HTML DOM element, preventing in-situ verification.</p>
+            </div>
+
+          </div>
+          </div>
+          <div class="carousel-controls">
+            <button class="carousel-btn" id="carouselPrev" aria-label="Previous">&#8592;</button>
+            <div class="carousel-labels" id="carouselDots">
+              <button class="carousel-label-btn is-active" data-slide="0">Overview</button>
+              <button class="carousel-label-btn" data-slide="1">ChatGPT Atlas</button>
+              <button class="carousel-label-btn" data-slide="2">ChatGPT Atlas</button>
+              <button class="carousel-label-btn" data-slide="3">Browser Use</button>
+              <button class="carousel-label-btn" data-slide="4">Gemini Agent</button>
+              <button class="carousel-label-btn" data-slide="5">Molmo Web</button>
+            </div>
+            <button class="carousel-btn" id="carouselNext" aria-label="Next">&#8594;</button>
+          </div>
+        </div>
+
+        <h2 class="paper-section-title" id="videos">Video Demonstrations</h2>
+        <div class="video-switch">
+          <button class="video-pill video-pill-find is-active" data-video="find">Find</button>
+          <button class="video-pill video-pill-guide" data-video="guide">Guide</button>
+          <button class="video-pill video-pill-hide" data-video="hide">Hide</button>
+          <button class="video-pill video-pill-pdf" data-video="pdf">PDF Reading</button>
+          <button class="video-pill video-pill-vqa" data-video="vqa">Visual Q&amp;A</button>
+        </div>
+        <div class="video-stage">
+          <video class="video-player is-active" data-video-panel="find" src="videos/find.mp4" controls playsinline></video>
+          <video class="video-player" data-video-panel="guide" src="videos/guide.mp4" controls playsinline></video>
+          <video class="video-player" data-video-panel="hide" src="videos/hide.mp4" controls playsinline></video>
+          <video class="video-player" data-video-panel="pdf" src="videos/pdf_asking.mp4" controls playsinline></video>
+          <video class="video-player" data-video-panel="vqa" src="videos/visual_question_answering.mp4" controls playsinline></video>
+        </div>
+
+        <h2 class="paper-section-title" id="modes">Method</h2>
+        <p class="paper-section-intro">
+          PageGuide offers three interaction modes, each targeting a distinct user need.
+          A lightweight intent router classifies each query and dispatches it to the appropriate handler,
+          which reads the live HTML DOM and performs a grounded action directly on the page.
+        </p>
+
+        <section class="modes-section">
+
+          <!-- System overview figure -->
+          <div class="method-workflow">
+            <img
+              src="figures/workflow_v2.png"
+              class="paper-figure method-workflow-img"
+              alt="PageGuide system workflow"
+            />
+            <p class="figure-caption">
+              <strong>Figure 4:</strong> Given a user query, the Router assigns it to one of
+              three handlers, after which the agent reads the HTML DOM
+              and produces the corresponding final state. (a) <sc>Find</sc>
+              (<span class="caption-arrow caption-arrow-find">——▶</span>): for
+              factual lookup queries (<em>e.g., "How many episodes in the movie Stranger Things?"</em>),
+              the agent locates supporting evidence spans; the final state highlights relevant elements directly
+              on the page (<em>e.g.,</em> <span class="caption-highlight-yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span>).
+              (b) <sc>Guide</sc> (<span class="caption-arrow caption-arrow-guide">——▶</span>): for navigation queries
+              (<em>e.g., "How do I change my password?"</em>), the agent iteratively
+              generates actions and incorporates feedback; the final state
+              is the target page reached after completing the steps (<em>e.g.,</em> the
+              Change Password form). (c) <sc>Hide</sc> (<span class="caption-arrow caption-arrow-hide">——▶</span>): for content-hiding
+              queries (<em>e.g., "Hide political posts"</em>), the agent scores HTML
+              DOM elements based on the user's intent; the final state hides
+              the matched elements on the page.
+            </p>
+          </div>
+
+          <!-- Prompt pills -->
+          <div class="prompt-tabs">
+            <div class="prompt-switch">
+              <button class="prompt-pill prompt-pill-router is-active" data-prompt="router">Router Prompt (Condensed)</button>
+              <button class="prompt-pill prompt-pill-find" data-prompt="find">Find Prompt (Condensed)</button>
+              <button class="prompt-pill prompt-pill-guide" data-prompt="guide">Guide Prompt (Condensed)</button>
+              <button class="prompt-pill prompt-pill-hide" data-prompt="hide">Hide Prompt (Condensed)</button>
+              <a class="prompt-paper-link" href="#" target="_blank" rel="noreferrer">See full prompts in the paper →</a>
+            </div>
+
+            <div class="prompt-panel is-active" data-prompt-panel="router">
+              <div class="prompt-box prompt-box-router">
+                <p><span class="prompt-role">System:</span> Given a user query and a brief page context, classify the query into one of three handlers: <code>find</code> (factual lookup), <code>guide</code> (step-by-step task), or <code>hide</code> (content hiding). Return a JSON object with the handler, confidence score, and a one-sentence justification.</p>
+                <p><span class="prompt-role">User:</span> Query: <em>"{query}"</em> &nbsp; Page context: <em>{page_title, content_type}</em></p>
+                <div class="prompt-example prompt-example-router">
+                  <span class="prompt-example-label">Examples</span>
+                  <p><em>"What is the price of this product?"</em><br>→ <code>{"handler": "find", "confidence": 0.9, "reason": "Question about page content"}</code></p>
+                  <p><em>"How do I report this video?"</em><br>→ <code>{"handler": "guide", "confidence": 0.9, "reason": "How-to question needing step-by-step guidance"}</code></p>
+                  <p><em>"Hide the ads on this page"</em><br>→ <code>{"handler": "hide", "confidence": 0.95, "reason": "Request to hide ads"}</code></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="prompt-panel" data-prompt-panel="find">
+              <div class="prompt-box prompt-box-find">
+                <p><span class="prompt-role">System:</span> Given a user query and a structured HTML DOM element index, answer the query in natural language. For every factual claim, insert an inline citation in the format <code>[N:"exact phrase"]</code>, where <code>N</code> is the element index and <code>exact phrase</code> is the verbatim text span supporting the claim.</p>
+                <p><span class="prompt-role">User:</span> Query: <em>"{query}"</em> &nbsp; HTML DOM index: <em>{element_id, text, tag, bbox}</em></p>
+                <div class="prompt-example prompt-example-find">
+                  <span class="prompt-example-label">Example</span>
+                  <p><em>Q: "Who directed this movie?"</em><br>
+                  A: The movie was directed by Christopher Nolan <code>[45:"Christopher Nolan"]</code>.</p>
+                  <p><em>Q: "Who are the main actors?"</em><br>
+                  A: The main actors are Leonardo DiCaprio <code>[23:"Leonardo DiCaprio"]</code>, Tom Hardy <code>[27:"Tom Hardy"]</code>, and Ellen Page <code>[31:"Ellen Page"]</code>.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="prompt-panel" data-prompt-panel="guide">
+              <div class="prompt-box prompt-box-guide">
+                <p><span class="prompt-role">System:</span> Given a user task and a structured HTML DOM element index, produce one step at a time as a JSON action object — instruction text, target SoM index, action type (<code>click</code>, <code>input</code>, <code>scroll</code>), and a next-step hint. Guide the user ONE step at a time.</p>
+                <p><span class="prompt-role">User:</span> Task: <em>"{query}"</em> &nbsp; Step: <em>{step_number}</em> &nbsp; HTML DOM index: <em>{element_id, text, tag, bbox}</em></p>
+                <div class="prompt-example prompt-example-guide">
+                  <span class="prompt-example-label">Example</span>
+                  <p><em>Q: "How do I report this video?" (Step 1)</em><br>
+                  → <code>{"step": 1, "instruction": "Click the three-dot menu (⋮) to see more options", "highlight": {"index": 5, "text": "⋮"}, "waitFor": "click", "isLastStep": false, "nextStepHint": "The menu will open with a Report option"}</code></p>
+                  <p><em>(Step 2, after menu opened — PAGE INDEX now shows [20] Report)</em><br>
+                  → <code>{"step": 2, "instruction": "Click 'Report' to report this video", "highlight": {"index": 20, "text": "Report"}, "waitFor": "click", "isLastStep": true, "nextStepHint": "You'll see reporting options"}</code></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="prompt-panel" data-prompt-panel="hide">
+              <div class="prompt-box prompt-box-hide">
+                <p><span class="prompt-role">System:</span> Given a hiding request and a structured HTML DOM element index, identify all elements that match the user's intent. For each matched element, return: (1) the element index, (2) a one-sentence justification, and (3) a short content snippet. Return at most 15 items; pick the most prominent if more match.</p>
+                <p><span class="prompt-role">User:</span> Request: <em>"{query}"</em> &nbsp; HTML DOM index: <em>{element_id, text, tag, bbox}</em></p>
+                <div class="prompt-example prompt-example-hide">
+                  <span class="prompt-example-label">Example</span>
+                  <p><em>Request: "Hide the ads on this page"</em><br>
+                  → <code>{"found": [{"index": 12, "reason": "Sponsored post marked as 'Ad'", "snippet": "Limited-time offer: Get 30% off today."}, {"index": 47, "reason": "Promoted banner advertisement", "snippet": "Shop now — exclusive deal"}], "message": "Found 2 advertisement elements on the page"}</code></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab buttons -->
+          <div class="mode-switch" role="tablist" aria-label="PageGuide modes">
+            <button class="mode-pill is-active" data-mode="find" role="tab">Find Example</button>
+            <button class="mode-pill" data-mode="guide" role="tab">Guide Example 1</button>
+            <button class="mode-pill" data-mode="guide2" role="tab">Guide Example 2</button>
+            <button class="mode-pill" data-mode="hide" role="tab">Hide Example</button>
+            <button class="mode-pill mode-pill-pdf" data-mode="pdf" role="tab">
+              <svg class="mode-pill-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4"/><path d="M6 9h4M6 12h6M6 15h4"/></svg>
+              PDF Reading
+            </button>
+            <button class="mode-pill mode-pill-vqa" data-mode="vqa" role="tab">
+              <svg class="mode-pill-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="16" height="12" rx="2"/><circle cx="10" cy="10" r="3"/><circle cx="10" cy="10" r="1" fill="currentColor" stroke="none"/></svg>
+              Visual Q&amp;A
+            </button>
+            <button class="mode-pill mode-pill-pageoff" data-mode="pageoff" role="tab">
+              <svg class="mode-pill-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><line x1="10" y1="3" x2="10" y2="10"/><path d="M6.34 6.34A6 6 0 1 0 13.66 6.34"/></svg>
+              Page Off
+            </button>
+          </div>
+
+          <div class="mode-stage">
+            <!-- Find -->
+            <article class="mode-block is-active" data-panel="find">
+              <div class="mode-block-copy">
+                <h3>Show the exact evidence behind every answer</h3>
+              </div>
+              <div class="mode-block-figure">
+                <img src="figures/find_example.png" class="paper-figure" alt="Find mode example" />
+                <p class="figure-caption">
+                  <strong>Figure 1:</strong>
+                Given a query in the agent side panel on the right (powered by Gemini-3-Flash), PageGuide
+                displays the full answer with clickable references that navigate to the corresponding highlighted evidence on the page
+                (<em>e.g.,</em> the page will jump to the location of the
+                <span class="caption-highlight-pink">Nevado Mismi</span>
+                when clicking at
+                <span class="caption-highlight-dark">Nevado Mismi<sup>[1]</sup></span>).
+                </p>
+              </div>
+            </article>
+
+            <!-- Guide -->
+            <article class="mode-block" data-panel="guide">
+              <div class="mode-block-copy">
+                <h3>Step-by-step help while the user stays in control</h3>
+              </div>
+              <div class="mode-block-figure">
+                <img src="figures/guide_example.png" class="paper-figure" alt="Guide mode example" />
+                <p class="figure-caption">
+                  <strong>Figure 2:</strong> Given the query <em>"How to add ABC to this GitHub project?"</em>,
+                  <sc>PageGuide</sc> (powered by Gemini-3-Flash) generates a step-by-step plan and delivers it one step at a time.
+                  The target UI element is highlighted directly on the page
+                  (<em>e.g.,</em> <span class="caption-highlight-green">Settings</span>,
+                  <span class="caption-highlight-red">Collaborators</span>),
+                  while the sidebar panel shows the current instruction, the outcome hint, and
+                  <span class="caption-btn-next">Next</span> / <span class="caption-btn-stop">Stop</span> controls.
+                  The user always drives the pace: each step only advances when <em>Next</em> is explicitly clicked,
+                  keeping the user in full control, especially when verification is required
+                  (<em>e.g.,</em> entering a password or confirming the collaborator's account).
+                </p>
+              </div>
+            </article>
+
+            <!-- Guide Example 2 -->
+            <article class="mode-block" data-panel="guide2">
+              <div class="mode-block-copy">
+                <h3>Navigate through FAQ sections step by step</h3>
+              </div>
+              <div class="mode-block-figure">
+                <img src="figures/guide_example_2.png" class="paper-figure" alt="Guide mode example 2" />
+                <p class="figure-caption">
+                  <strong>Guide Example 2:</strong> Given the query <em>"How to find the time frames to find a lost item?"</em>,
+                  <sc>PageGuide</sc> navigates the user through an FAQ page step by step.
+                  Each step highlights the target element on the page
+                  (<em>e.g.,</em> <span class="caption-highlight-pink">form</span>,
+                  <span class="caption-highlight-green">entered into our system for processing</span>)
+                  while the sidebar panel delivers the current instruction, a next-step hint, and
+                  <span class="caption-btn-next">Next</span> / <span class="caption-btn-stop">Stop</span> controls.
+                </p>
+              </div>
+            </article>
+
+            <!-- Hide -->
+            <article class="mode-block" data-panel="hide">
+              <div class="mode-block-copy">
+                <h3>Remove distractions with a transparent, reviewable process</h3>
+              </div>
+              <div class="mode-block-figure">
+                <img src="figures/hide_example_2.png" class="paper-figure" alt="Hide mode example" />
+                <p class="figure-caption">
+                  <strong>Figure 3:</strong> On social platforms such as X.com, users often encounter repetitive or distracting content.
+                  Given the query <em>"Can you hide advertisements?"</em>,
+                  <sc>PageGuide</sc> identifies matching HTML DOM elements and surfaces a summary pop-up on the right
+                  listing the detected items. The user can review and confirm the selection before the action is applied—each confirmed element
+                  is hidden via CSS <span class="caption-code-red">display:none</span>, keeping the surrounding layout intact.
+                </p>
+              </div>
+            </article>
+
+            <!-- PDF Reading -->
+            <article class="mode-block" data-panel="pdf">
+              <div class="mode-block-copy">
+                <h3>Ask questions about any PDF — directly in the browser</h3>
+              </div>
+              <div class="mode-block-figure">
+                <img src="figures/pdf_asking_feature.png" class="paper-figure" alt="PDF Reading feature example" />
+                <p class="figure-caption">
+                  <strong>PDF Reading.</strong> When the user opens a PDF in the browser,
+                  <sc>PageGuide</sc> automatically detects the document and enables document-level Q&amp;A.
+                  The agent reads the full PDF content and answers questions with inline citations,
+                  so users can verify every claim without leaving the browser tab.
+                </p>
+              </div>
+            </article>
+
+            <!-- Visual Q&A -->
+            <article class="mode-block" data-panel="vqa">
+              <div class="mode-block-copy">
+                <h3>Answer questions about images and visual content on the page</h3>
+              </div>
+              <div class="mode-block-figure">
+                <img src="figures/vision_asking_feature.png" class="paper-figure" alt="Visual Question Answering feature example" />
+                <p class="figure-caption">
+                  <strong>Visual Q&amp;A.</strong> For pages containing charts, diagrams, or images,
+                  <sc>PageGuide</sc> captures the relevant visual element and routes the query to a vision-capable model.
+                  Users can ask natural-language questions about any image on the page and receive grounded,
+                  evidence-backed answers without needing to open a separate tool.
+                </p>
+              </div>
+            </article>
+
+            <!-- Page Off -->
+            <article class="mode-block" data-panel="pageoff">
+              <div class="mode-block-copy">
+                <h3>Turn off the page to reclaim your focus</h3>
+              </div>
+              <div class="mode-block-figure">
+                <img src="figures/page_off_feature.png" class="paper-figure" alt="Page Off feature example" />
+                <p class="figure-caption">
+                  <strong>Page Off.</strong> With a single click, <sc>PageGuide</sc> dims the entire page
+                  and blocks all interactive elements, helping users avoid distractions and stay focused.
+                  The overlay can be dismissed at any time, restoring the page to its original state
+                  without any permanent changes to the DOM.
+                </p>
+              </div>
+            </article>
+          </div>
+
+        </section>
+
+        <h2 class="paper-section-title" id="results">User Study</h2>
+        <p class="paper-section-intro">
+          We conducted a within-subject controlled study (<em>N</em> = 94) on real websites,
+          with counterbalanced ordering to mitigate learning effects.
+          Each participant completed 6 tasks (2 per mode) under both a control condition
+          (standard browser tools) and an extension condition.
+          We measured task accuracy, completion time, and behavioral signals (Ctrl+F, clicks, scrolls).
+        </p>
+
+        <section class="results-section">
+
+          <div class="results-figures">
+
+            <!-- Row 1: Task accuracy -->
+            <div class="results-figure-row">
+              <div class="results-figure-item results-figure-wide">
+                <img
+                  src="figures/overall_accuracy.png"
+                  class="paper-figure paper-figure-wide"
+                  alt="Task accuracy across modes"
+                />
+                <p class="figure-caption">
+                  <strong>Figure 5:</strong> Task performance comparing control and extension conditions across all three features.
+                  <sc>Find</sc> and <sc>Guide</sc> are evaluated by accuracy (proportion of correctly completed tasks);
+                  <sc>Hide</sc> is evaluated by accuracy (proportion of target elements correctly identified).
+                  <sc>PageGuide</sc> improves performance in all features: <sc>Find</sc> (0.81 → 0.86),
+                  <sc>Guide</sc> (0.23 → 0.53), and <sc>Hide</sc> accuracy (0.30 → 0.56),
+                  with the largest gains in <sc>Guide</sc> and <sc>Hide</sc>.
+                </p>
+              </div>
+            </div>
+
+            <!-- Row 2: Task completion time -->
+            <div class="results-figure-row">
+              <div class="results-figure-item results-figure-wide">
+                <img
+                  src="figures/completion_time_plot.png"
+                  class="paper-figure paper-figure-wide"
+                  alt="Task completion time comparison"
+                />
+                <p class="figure-caption">
+                  <strong>Figure 6:</strong> Task completion time (seconds) for the control and extension conditions,
+                  restricted to correctly completed tasks. Each box shows the median and interquartile range across participants.
+                  <sc>PageGuide</sc> reduces completion time across all three features:
+                  <sc>Find</sc> (65.2s → 52.8s), <sc>Hide</sc> (104s → 31.7s), and <sc>Guide</sc> (95.8s → 66.7s),
+                  with the largest gain observed in <sc>Hide</sc>.
+                </p>
+              </div>
+            </div>
+
+            <!-- Row 2: Behavioral signals overall -->
+            <div class="results-figure-row">
+              <div class="results-figure-item results-figure-wide">
+                <img
+                  src="figures/behavioral_overview.png"
+                  class="paper-figure paper-figure-wide"
+                  alt="Behavioral signals overview"
+                />
+                <p class="figure-caption">
+                  <strong>Figure 7:</strong> Behavioral signals (mean ± SE) comparing the control and extension conditions.
+                  Each bar shows the average count or distance per task for five metrics: Ctrl+F presses, text selections,
+                  mouse clicks, scroll count, and mouse movement distance. All five metrics decrease substantially with
+                  <sc>PageGuide</sc>, indicating that users rely less on manual search and perform fewer interactions
+                  to complete the same tasks.
+                </p>
+              </div>
+            </div>
+
+            <!-- Row 3: Behavioral signals by task type -->
+            <div class="results-figure-row">
+              <div class="results-figure-item results-figure-wide">
+                <img
+                  src="figures/behavioral_by_task.png"
+                  class="paper-figure paper-figure-wide"
+                  alt="Behavioral signals by task type"
+                />
+                <p class="figure-caption">
+                  <strong>Figure 8:</strong> Behavioral metrics (mean ± SE) broken down by task type
+                  (<sc>Find</sc>, <sc>Guide</sc>, <sc>Hide</sc>) and condition. While <sc>Find</sc> and <sc>Hide</sc>
+                  show consistent reductions across all signals, <sc>Guide</sc> shows a different pattern:
+                  page visits and mouse movement distance increase with <sc>PageGuide</sc>, reflecting that
+                  the extension actively guides users to navigate to new pages as part of the task.
+                </p>
+              </div>
+            </div>
+
+            <!-- Row 4: Likert ratings -->
+            <div class="results-figure-row">
+              <div class="results-figure-item results-figure-wide">
+                <img
+                  src="figures/survey_diverging_likert.png"
+                  class="paper-figure paper-figure-wide"
+                  alt="Post-study Likert ratings"
+                />
+                <p class="figure-caption">
+                  <strong>Figure 9:</strong> Post-study Likert ratings (1 = Strongly Disagree, 7 = Strongly Agree)
+                  for each interaction mode. Each mode includes three questions: whether <sc>PageGuide</sc> is accurate
+                  or gives correct guidance (F1/G1), whether it makes the task easier (F2/G2/H2), and whether the task
+                  would be difficult to complete without it (F3/G3/H3). Bars extending to the right indicate agreement.
+                  <sc>Find</sc> and <sc>Hide</sc> show the most concentrated positive distributions
+                  (89–91% agreement on ease of use), while <sc>Guide</sc> shows slightly more variance,
+                  reflecting the added complexity of multi-step procedural tasks.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </main>
+
+      <h2 class="paper-section-title" id="bibtex">BibTeX</h2>
+      <div class="bibtex-section">
+        <div class="bibtex-card">
+          <button class="bibtex-copy-btn" id="copyBibtex" aria-label="Copy BibTeX">Copy</button>
+          <pre class="bibtex-pre" id="bibtexContent">@misc{pageguide2026,
+  title     = {PageGuide: Browser Extension to Assist Users in Navigating
+               a Webpage and Locate Information},
+  author    = {Anonymous Authors},
+  year      = {2026},
+  note      = {Under review}
+}</pre>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>
+          This website is inspired by the
+          <a href="https://shikun.io/projects/clarity" target="_blank" rel="noreferrer"
+            >Clarity Template</a
+          >
+          by
+          <a href="https://shikun.io/" target="_blank" rel="noreferrer">Shikun Liu</a>.
+        </p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
