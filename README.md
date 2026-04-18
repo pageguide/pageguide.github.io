@@ -12,28 +12,6 @@ XWebAgent supports three interaction modes:
 - `Guide`: provides step-by-step task help while keeping the user in control
 - `Hide`: suppresses distracting or irrelevant content with reversible controls
 
-## Tech Stack
-
-- `index.html`
-- `styles.css`
-- `script.js`
-
-No framework or build step is required.
-
-## Local Preview
-
-From the repository root:
-
-```bash
-python -m http.server 4172
-```
-
-Then open `http://localhost:4172`.
-
-## Deployment
-
-This repository is intended for GitHub Pages. Since the site is fully static, pushing changes to `main` is sufficient when GitHub Pages is configured to serve from the repository root.
-
 ## Credits
 
 - Project content: XWebAgent
