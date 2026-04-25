@@ -210,14 +210,36 @@ a.author-link:hover {
 }
 
 .hero-affiliations {
-  margin-top: 10px;
-  color: #7a7f86;
-  line-height: 1.7;
+  margin-top: 14px;
   text-align: center;
 }
 
-.hero-affiliations p {
-  margin: 0;
+.affiliation-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+
+.affiliation-logo-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.affiliation-logo {
+  width: auto;
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+.affiliation-logo-auburn {
+  height: 40px;
+}
+
+.affiliation-logo-uva {
+  height: 120px;
 }
 
 .hero-links {
