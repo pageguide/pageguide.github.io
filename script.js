@@ -150,7 +150,6 @@ videoPills.forEach((pill) => {
     videoPlayers.forEach((v) => {
       const active = v.dataset.videoPanel === target;
       v.classList.toggle("is-active", active);
-      if (!active) v.pause();
     });
     pill.classList.add("is-active");
   });

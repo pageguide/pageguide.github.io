@@ -482,13 +482,14 @@ a.author-link:hover {
 
 .video-player {
   display: none;
-  width: 100%;
+  width: 75%;
   border-radius: 8px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.10);
 }
 
 .video-player.is-active {
   display: block;
+  margin: 0 auto;
 }
 
 /* ─────────────────────────────────────────────────────────── */
