@@ -142,6 +142,7 @@ promptPills.forEach((pill) => {
 // Video demonstrations tab switching
 const videoPills = document.querySelectorAll(".video-pill");
 const videoPlayers = document.querySelectorAll(".video-player");
+const demoVideosContainer = document.getElementById("demo-videos-container");
 
 videoPills.forEach((pill) => {
   pill.addEventListener("click", () => {
@@ -149,11 +150,34 @@ videoPills.forEach((pill) => {
     videoPills.forEach((p) => p.classList.remove("is-active"));
     videoPlayers.forEach((v) => {
       const active = v.dataset.videoPanel === target;
+      if (v.classList.contains("is-active") && !active && typeof v.pause === 'function') {
+        v.pause();
+      }
       v.classList.toggle("is-active", active);
+      if (active && typeof v.play === 'function') {
+        v.play().catch(e => console.log(e));
+      }
     });
     pill.classList.add("is-active");
   });
 });
+
+// Autoplay active video when scrolled into view
+if (demoVideosContainer) {
+  const mp4Observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const activeVideo = demoVideosContainer.querySelector(".video-player.is-active");
+      if (activeVideo && typeof activeVideo.play === 'function') {
+        if (entry.isIntersecting) {
+          activeVideo.play().catch(e => console.log(e));
+        } else {
+          activeVideo.pause();
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+  mp4Observer.observe(demoVideosContainer);
+}
 
 // BibTeX copy button
 const copyBtn = document.getElementById("copyBibtex");
@@ -170,4 +194,37 @@ if (copyBtn && bibtexContent) {
       }, 2000);
     });
   });
+}
+
+// YouTube API for autoplay and volume control
+let ytPlayer;
+let ytObserver;
+
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player('youtube-demo', {
+    events: {
+      'onReady': onPlayerReady
+    }
+  });
+}
+
+function onPlayerReady(event) {
+  // Set volume to 50%
+  event.target.setVolume(50);
+  
+  // Setup intersection observer to play when in view
+  ytObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        event.target.playVideo();
+      } else {
+        event.target.pauseVideo();
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  const iframe = document.getElementById('youtube-demo');
+  if (iframe) {
+    ytObserver.observe(iframe);
+  }
 }

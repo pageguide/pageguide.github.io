@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://www.youtube.com/iframe_api"></script>
   </head>
   <body>
     <div class="page-shell">
@@ -57,6 +58,30 @@
             </div>
           </div>
         </section>
+
+        <!-- add the page guide demo video here -->
+        <div class="video-stage" style="display: flex; justify-content: center;">
+          <iframe
+            id="youtube-demo"
+            style="width: 100%; max-width: 900px; aspect-ratio: 1.85/1; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
+            src="https://www.youtube.com/embed/WKfmqtED82s?enablejsapi=1&modestbranding=1&rel=0"
+            title="PageGuide: Browser Extension to Assist Users in Navigating a Webpage and Locating Information"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <!-- <div class="video-stage" style="display: flex; justify-content: center;">
+          <video 
+            controls 
+            style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
+          >
+            <source src="videos/page_guide_demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div> -->
 
         <section class="callout-grid" id="overview">
           <h2 class="paper-section-title">Abstract</h2>
@@ -161,12 +186,12 @@
           <button class="video-pill video-pill-pdf" data-video="pdf">PDF Reading</button>
           <button class="video-pill video-pill-vqa" data-video="vqa">Visual Q&amp;A</button>
         </div>
-        <div class="video-stage">
-          <img class="video-player is-active" data-video-panel="find" src="videos/find.gif" alt="Find feature demo" />
-          <img class="video-player is-active" data-video-panel="guide" src="videos/guide.gif" alt="Guide feature demo" />
-          <img class="video-player is-active" data-video-panel="hide" src="videos/hide.gif" alt="Hide feature demo" />
-          <img class="video-player is-active" data-video-panel="pdf" src="videos/pdf_asking.gif" alt="PDF asking feature demo" />
-          <img class="video-player is-active" data-video-panel="vqa" src="videos/vision_asking.gif" alt="Visual question answering demo" />
+        <div class="video-stage" id="demo-videos-container">
+          <video class="video-player is-active" data-video-panel="find" src="videos/find.mp4" controls loop playsinline></video>
+          <video class="video-player" data-video-panel="guide" src="videos/guide.mp4" controls loop playsinline></video>
+          <video class="video-player" data-video-panel="hide" src="videos/hide.mp4" controls loop playsinline></video>
+          <video class="video-player" data-video-panel="pdf" src="videos/pdf_asking.mp4" controls loop playsinline></video>
+          <video class="video-player" data-video-panel="vqa" src="videos/visual_asking.mp4" controls loop playsinline></video>
         </div>
 
         <h2 class="paper-section-title" id="modes">Method</h2>
