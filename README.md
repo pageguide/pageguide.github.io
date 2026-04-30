@@ -11,8 +11,3 @@ XWebAgent supports three interaction modes:
 - `Find`: highlights exact supporting evidence on webpages, PDFs, and images
 - `Guide`: provides step-by-step task help while keeping the user in control
 - `Hide`: suppresses distracting or irrelevant content with reversible controls
-
-## Credits
-
-- Project content: XWebAgent
-- Website design inspiration: [Clarity Template](https://shikun.io/projects/clarity) by [Shikun Liu](https://shikun.io/)
