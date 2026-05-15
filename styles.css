@@ -249,6 +249,14 @@ a.author-link:hover {
   margin-top: 18px;
 }
 
+.hero-link-featured {
+  background: linear-gradient(135deg, #e07820, #c95c10) !important;
+  color: white !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 16px rgba(224, 120, 32, 0.35) !important;
+  font-weight: 600;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -478,6 +486,40 @@ a.author-link:hover {
 
 .video-stage {
   margin-bottom: 40px;
+}
+
+.realworld-highlight {
+  margin: 32px 0;
+  padding: 36px 40px;
+  background: linear-gradient(135deg, #fff8f0, #fff3e0);
+  border: 2px solid #e07820;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(224, 120, 32, 0.12);
+  text-align: center;
+}
+
+.realworld-label {
+  display: inline-block;
+  background: #e07820;
+  color: white;
+  font-size: 0.85rem;
+  font-family: 'EB Garamond', Georgia, serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.realworld-title {
+  margin-top: 8px;
+}
+
+.realworld-intro {
+  max-width: 680px;
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-style: italic;
 }
 
 .video-player {
