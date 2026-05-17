@@ -13,8 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://www.youtube.com/iframe_api"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </head>
   <body>
+
     <div class="page-shell">
 
       <main id="home">
@@ -24,9 +26,8 @@
               <span class="hero-mark-inline">🍊</span> PageGuide: Browser Extension to Assist Users in Navigating a Webpage
               and Locating Information
             </h1>
-            <p class="hero-tagline">A browser extension that grounds LLM answers in a page directly<br>
-              
-              🖍️ highlights evidence, 🗺️ navigates step-by-step, 🙈 hides distractions, 📄 reads PDFs, and 👁️ answers visual questions (see <a href="#modes">Method and Examples</a>).</p>
+            <p class="hero-tagline">
+              🖍️ highlights evidence in a page or pdf, 🗺️ navigates on the websites, 🙈 hides distracted content, and 👁️ answers visual questions (see <a href="#modes">Method and Examples</a>).</p>
             <div class="hero-authors">
               <a href="https://tin-xai.github.io/" target="_blank" rel="noreferrer" class="author-link">Tin Nguyen<sup>*†1</sup></a>,
               <a href="https://truongthoithang.com/" target="_blank" rel="noreferrer" class="author-link">Thang T. Truong<sup>*1</sup></a>,
@@ -47,30 +48,38 @@
             </div>
 
             <div class="hero-links hero-links-centered">
-              <a class="button hero-link" href="#overview">Abstract</a>
-              <a class="button hero-link" href="#motivation">Motivation</a>
+              <!-- <a class="button hero-link" href="#overview">Abstract</a>
+              <a class="button hero-link" href="#motivation">Motivation</a> -->
+              <a class="button hero-link" href="https://arxiv.org/abs/2604.23772" target="_blank" rel="noreferrer">Paper</a>
               <a class="button hero-link hero-link-featured" href="#videos">🍊 Real World Application</a>
-              <a class="button hero-link" href="#modes">Method and Examples</a>
+              <a class="button hero-link" href="#modes">Method & Examples</a>
               <a class="button hero-link" href="#results">User Study</a>
               
-              <a class="button hero-link" href="https://arxiv.org/abs/2604.23772" target="_blank" rel="noreferrer">ArXiv</a>
               <a class="button hero-link" href="https://github.com/tin-xai/pageguide" target="_blank" rel="noreferrer">Chrome Extension</a>
             </div>
           </div>
         </section>
 
-        <!-- add the page guide demo video here -->
-        <div class="video-stage" style="display: flex; justify-content: center;">
-          <iframe
-            id="youtube-demo"
-            style="width: 100%; max-width: 900px; aspect-ratio: 1.85/1; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
-            src="https://www.youtube.com/embed/WKfmqtED82s?enablejsapi=1&modestbranding=1&rel=0"
-            title="PageGuide: Browser Extension to Assist Users in Navigating a Webpage and Locating Information"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
+        <!-- Demo video + tweet side by side -->
+        <div class="video-tweet-row">
+          <div class="video-tweet-video">
+            <iframe
+              id="youtube-demo"
+              style="width: 100%; aspect-ratio: 1.85/1; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
+              src="https://www.youtube.com/embed/WKfmqtED82s?enablejsapi=1&modestbranding=1&rel=0"
+              title="PageGuide: Browser Extension to Assist Users in Navigating a Webpage and Locating Information"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="video-tweet-aside">
+            <p class="video-tweet-label"><span class="video-tweet-dot"></span> Why it matters</p>
+            <blockquote class="twitter-tweet" data-dnt="true" data-theme="light" data-width="340">
+              <a href="https://twitter.com/yoavgo/status/2055904643251683785"></a>
+            </blockquote>
+          </div>
         </div>
 
         <!-- <div class="video-stage" style="display: flex; justify-content: center;">
@@ -162,6 +171,16 @@
               <p class="figure-caption"><strong>Molmo Web.</strong> Points to a location on the page but does not ground the answer in the actual HTML DOM element, preventing in-situ verification.</p>
             </div>
 
+            <div class="carousel-slide carousel-slide-tweet">
+              <div class="tweet-embed-wrap">
+                <blockquote class="twitter-tweet" data-dnt="true" data-theme="light">
+                  <p lang="en" dir="ltr">Yes, this is why verifying evidence directly on the webpage/pdf matters. A citation or link alone does not guarantee that the referenced source actually supports the generated claim. <a href="https://t.co/placeholder">pic.twitter.com/…</a></p>
+                  &mdash; Tin (Kevin) Nguyen (@tin_ng_qn) <a href="https://twitter.com/tin_ng_qn/status/2056025025023447454">May 2026</a>
+                </blockquote>
+              </div>
+              <p class="figure-caption"><strong>In the Wild.</strong> AI assistants that return citations can still hallucinate — a link does not guarantee the referenced source actually supports the generated claim. PageGuide addresses this by grounding every answer directly in the live HTML DOM, so users can verify evidence in-situ rather than trusting a bare citation.</p>
+            </div>
+
           </div>
           </div>
           <div class="carousel-controls">
@@ -173,6 +192,7 @@
               <button class="carousel-label-btn" data-slide="3">Browser Use</button>
               <button class="carousel-label-btn" data-slide="4">Gemini Agent</button>
               <button class="carousel-label-btn" data-slide="5">Molmo Web</button>
+              <button class="carousel-label-btn" data-slide="6">In the Wild</button>
             </div>
             <button class="carousel-btn" id="carouselNext" aria-label="Next">&#8594;</button>
           </div>
