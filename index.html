@@ -12,6 +12,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      .cws-btn-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+      .cws-badge-star {
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        background: linear-gradient(135deg, #ffd700, #ffa500);
+        color: white;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        box-shadow: 0 4px 10px rgba(255, 165, 0, 0.4);
+        z-index: 10;
+        border: 1.5px solid white;
+        user-select: none;
+      }
+      .cws-btn-custom {
+        background: #f5f8fb !important;
+        border: 2px solid #cbdbeb !important;
+        color: #2c1a0e !important;
+        box-shadow: 0 4px 14px rgba(31, 41, 55, 0.03) !important;
+        transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease !important;
+      }
+      .cws-btn-custom:hover {
+        background: #ebf3fa !important;
+        border-color: #9cbce0 !important;
+        box-shadow: 0 6px 18px rgba(156, 188, 224, 0.25) !important;
+        transform: translateY(-1px);
+      }
+    </style>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="062c6b0a-fb98-487f-8468-a90d931e7b7c"></script>
@@ -57,13 +94,16 @@
               <a class="button hero-link" href="#results">User Study</a>
             </div>
             <div class="hero-links hero-links-centered" style="margin-top: 12px;">
-              <a class="button hero-link hero-link-featured" 
-                 href="https://chromewebstore.google.com/detail/pageguide/jjamnggpgpgfjehkcmabopcjkichjgip?authuser=0&hl=en" 
-                 target="_blank" 
-                 rel="noreferrer"
-                 onclick="setTimeout(function() { window.location.href = 'how_to_load.html'; }, 100);">
-                 🍊 Add to Chrome (One-Click)
-              </a>
+              <div class="cws-btn-wrapper">
+                <span class="cws-badge-star">⭐</span>
+                <a class="button hero-link cws-btn-custom" 
+                   href="https://chromewebstore.google.com/detail/pageguide/jjamnggpgpgfjehkcmabopcjkichjgip?authuser=0&hl=en" 
+                   target="_blank" 
+                   rel="noreferrer"
+                   onclick="setTimeout(function() { window.location.href = 'how_to_load.html'; }, 100);">
+                   🍊 Add to Chrome (One-Click)
+                </a>
+              </div>
             </div>
           </div>
         </section>
