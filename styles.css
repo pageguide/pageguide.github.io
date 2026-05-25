@@ -35,12 +35,11 @@ body {
 
 /* ── Academic paper section titles ───────────────── */
 .paper-section-title {
-  text-align: center;
+  margin: 0 auto;
   font-family: 'EB Garamond', Georgia, serif;
   font-size: 2rem;
   font-weight: 500;
   letter-spacing: 0.01em;
-  margin: 56px 0 20px;
   color: var(--ink);
 }
 

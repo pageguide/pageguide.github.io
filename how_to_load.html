@@ -8,6 +8,79 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Onboarding-specific aesthetic styling */
+      .onboarding-main {
+        max-width: 900px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 auto;
+        padding: 10px 0;
+      }
+      .onboarding-card {
+        background: var(--paper);
+        border: 1px solid rgba(29, 47, 45, 0.08);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius-md);
+        padding: 40px;
+        margin-bottom: 32px;
+        position: relative;
+        overflow: hidden;
+      }
+      .onboarding-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, var(--accent), #d98e52);
+      }
+      .manual-card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        padding: 40px;
+        margin-bottom: 32px;
+      }
+      .manual-step-item {
+        margin-bottom: 36px;
+        border-bottom: 1px dashed var(--line);
+        padding-bottom: 24px;
+      }
+      .manual-step-item:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .step-tag {
+        display: inline-block;
+        background: var(--ink);
+        color: white;
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-family: inherit;
+        font-weight: 700;
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .step-tag-accent {
+        background: var(--accent);
+      }
+      .step-image-wrap {
+        text-align: center;
+        margin-top: 16px;
+      }
+      .step-img {
+        max-width: 90%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        border: 1px solid var(--line);
+      }
+    </style>
   </head>
   <body>
     <div class="page-shell">
@@ -18,66 +91,169 @@
         </nav>
       </div>
 
-      <main id="home" style="max-width: 900px; width: 100%; box-sizing: border-box; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 14px rgba(31, 41, 55, 0.04); border: 1px solid rgba(29, 47, 45, 0.08);">
-        <h1 style="margin: 0 auto 30px auto; text-align: center; max-width: 100%;">Manual Installation</h1>
-        <p style="margin-bottom: 30px; text-align: center;">Thank you for your interest in PageGuide. To install the extension manually, please follow the instructions below. We are currently undergoing Chrome Web Store review, and expect the extension to be available there soon.</p>
-        
-        <h3 style="margin-top: 30px; margin-bottom: 10px;">1. Download</h3>
-        <ul>
-          <li style="margin-bottom: 10px;">Download the <a href="https://github.com/tin-xai/pageguide/releases/download/pageguide/pageguide-master.zip">latest zip</a> file from this repo (<strong>master</strong> branch).</li>
-        </ul>
+      <main class="onboarding-main">
+        <h1 class="paper-section-title" style="margin-top: 20px; text-align: center;">Thank you for your interest in PageGuide</h1>
+        <p class="paper-section-intro" style="text-align: center; max-width: 760px; margin-bottom: 40px;">
+          To get started, we recommend installing the extension in one click from the Chrome Web Store. Below you will find both the one-click setup guide and our manual installation steps in case the Web Store installation fails.
+        </p>
 
-        <h3 style="margin-top: 30px; margin-bottom: 10px;">2. Install</h3>
-        <ol style="padding-left: 20px;">
-          <li style="margin-bottom: 20px; padding-left: 10px;">
-            Open Chrome and go to <strong>chrome://extensions/</strong>
-          </li>
-          <li style="margin-bottom: 20px; padding-left: 10px;">
-            Enable <strong>Developer mode</strong> (toggle in top right)
-          </li>
-          <li style="margin-bottom: 20px; padding-left: 10px;">
-            Click <strong>Load unpacked</strong>
-            <p align="center" style="margin-top: 10px;">
-              <img src="figures/load_extension/load_extension.png" alt="Load unpacked" width="600" style="border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <!-- One-Click Chrome Web Store Section -->
+        <section class="onboarding-card">
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div class="eyebrow" style="color: var(--accent); margin-bottom: 6px;">Recommended Flow</div>
+            <h2 style="font-size: 1.8rem; margin: 0 0 16px;">One-Click Store Installation</h2>
+            <p style="color: var(--muted); max-width: 640px; margin: 0 auto 24px; line-height: 1.7;">
+              Add the extension directly to your Chrome browser from the Web Store.
             </p>
-          </li>
-          <li style="margin-bottom: 20px; padding-left: 10px;">
-            Select the <strong>pageguide</strong> folder from the downloaded and unpacked zip file
-            <p align="center" style="margin-top: 10px;">
-              <img src="figures/load_extension/unzip_folder.png" alt="Select the pageguide folder" width="500" style="border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            </p>
-          </li>
-          <li style="margin-bottom: 20px; padding-left: 10px;">
-            Click Extension icon
-            <p align="center" style="margin-top: 10px;">
-              <img src="figures/load_extension/open_extension_icon.png" alt="Click Extension icon" width="350" style="border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            </p>
-          </li>
-          <li style="margin-bottom: 20px; padding-left: 10px;">
-            Pin the extension icon to your toolbar
-            <p align="center" style="margin-top: 10px;">
-              <img src="figures/load_extension/pin_icon.png" alt="Pin the extension icon" width="350" style="border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            </p>
-          </li>
-          <li style="margin-bottom: 20px; padding-left: 10px;">
-            Use the extension by clicking the icon in the toolbar
-            <p align="center" style="margin-top: 10px;">
-              <img src="figures/load_extension/click_icon_to_use.png" alt="Use the extension" width="350" style="border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            </p>
-          </li>
-        </ol>
+            <a class="button hero-link hero-link-featured" 
+               style="font-size: 1.15rem; padding: 14px 28px; border-radius: 12px;" 
+               href="https://chromewebstore.google.com/detail/pageguide/jjamnggpgpgfjehkcmabopcjkichjgip?authuser=0&hl=en" 
+               target="_blank" 
+               rel="noreferrer">
+              🍊 Download from Chrome Store
+            </a>
+          </div>
 
-        <h3 style="margin-top: 30px; margin-bottom: 10px;">3. Upgrading</h3>
-        <ul>
-          <li style="margin-bottom: 10px;">Download the <a href="https://github.com/tin-xai/pageguide/archive/refs/heads/master.zip">latest zip</a> file</li>
-          <li style="margin-bottom: 10px;">Unzip and replace the existing <strong>pageguide</strong> folder.</li>
-          <li style="margin-bottom: 10px;">Reload the extension in <strong>chrome://extensions/</strong> by clicking the reload button on the extension card.</li>
-        </ul>
+          <hr style="border: 0; border-top: 1px solid var(--line); margin: 36px 0;" />
+
+          <div class="eyebrow" style="text-align: center; margin-bottom: 24px;">Setup Steps</div>
+          <div class="study-grid">
+            <div class="callout" style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 22px; background: rgba(255,255,255,0.4);">
+              <div style="text-align: center; width: 100%;">
+                <div class="step-tag step-tag-accent">CWS DOWNLOAD</div>
+                <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Download Extension</h3>
+                <p style="font-size: 0.94rem; line-height: 1.6; color: var(--muted); margin: 0;">
+                  Click the download button above, then click <strong>"Add to Chrome"</strong> in the web store interface.
+                </p>
+              </div>
+            </div>
+
+            <div class="callout" style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 22px; background: rgba(255,255,255,0.4);">
+              <div style="text-align: center; width: 100%;">
+                <div class="step-tag step-tag-accent">PIN TOOL</div>
+                <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Pin the Icon</h3>
+                <p style="font-size: 0.94rem; line-height: 1.6; color: var(--muted); margin: 0 0 16px 0;">
+                  Click the extensions puzzle icon (🧩) in the browser toolbar, find PageGuide, and pin it.
+                </p>
+              </div>
+              <img src="figures/load_extension/pin_icon_without_numbers.png" alt="Pin extension" style="max-width: 100%; max-height: 100px; object-fit: contain; border-radius: 8px; border: 1px solid var(--line);" />
+            </div>
+
+            <div class="callout" style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 22px; background: rgba(255,255,255,0.4);">
+              <div style="text-align: center; width: 100%;">
+                <div class="step-tag step-tag-accent">SELECT ICON</div>
+                <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Select & Use</h3>
+                <p style="font-size: 0.94rem; line-height: 1.6; color: var(--muted); margin: 0 0 16px 0;">
+                  Select the 🍊 PageGuide icon in your toolbar to activate the grounded assistance side panel on any website.
+                </p>
+              </div>
+              <img src="figures/load_extension/click_icon_without_numbers.png" alt="Select PageGuide icon" style="max-width: 100%; max-height: 100px; object-fit: contain; border-radius: 8px; border: 1px solid var(--line);" />
+            </div>
+          </div>
+        </section>
+
+        <!-- Manual Installation Section -->
+        <h2 class="paper-section-title" id="manual-install" style="margin-top: 48px; margin-bottom: 16px;">Manual Installation Guide</h2>
+        <p class="paper-section-intro" style="text-align: center; max-width: 700px; margin-bottom: 30px;">
+          If the Chrome Web Store installation fails, or if you prefer running developers' manual builds, please follow these exact, step-by-step instructions:
+        </p>
+
+        <section class="manual-card">
+          <div class="manual-step-item">
+            <div class="step-tag">Step 0</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Download Source Archive</h3>
+            <p style="color: var(--muted); line-height: 1.75; font-size: 0.98rem; margin: 0;">
+              Download the <a href="https://github.com/tin-xai/pageguide/archive/refs/heads/master.zip" style="color: var(--accent); font-weight: 600; text-decoration: underline;">latest zip</a> file from the repository (<strong>master</strong> branch) and extract the folder on your computer.
+            </p>
+          </div>
+
+          <div class="manual-step-item">
+            <div class="step-tag">Step 1</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Navigate to Extensions Page</h3>
+            <p style="color: var(--muted); line-height: 1.75; font-size: 0.98rem; margin: 0;">
+              Open a new tab in your Chrome browser and navigate to <strong>chrome://extensions/</strong>
+            </p>
+          </div>
+
+          <div class="manual-step-item">
+            <div class="step-tag">Step 2</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Enable Developer Mode</h3>
+            <p style="color: var(--muted); line-height: 1.75; font-size: 0.98rem; margin: 0;">
+              Enable the <strong>Developer mode</strong> toggle switch in the top right corner of the Extensions dashboard.
+            </p>
+          </div>
+
+          <div class="manual-step-item">
+            <div class="step-tag">Step 3</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Click Load Unpacked</h3>
+            <p style="color: var(--muted); line-height: 1.75; font-size: 0.98rem; margin: 0 0 16px 0;">
+              Click the <strong>Load unpacked</strong> button in the top left corner.
+            </p>
+            <div class="step-image-wrap">
+              <img src="figures/load_extension/load_extension.png" class="step-img" alt="Click Load unpacked in Chrome" />
+            </div>
+          </div>
+
+          <div class="manual-step-item">
+            <div class="step-tag">Step 4</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Select the PageGuide Folder</h3>
+            <p style="color: var(--muted); line-height: 1.75; font-size: 0.98rem; margin: 0 0 16px 0;">
+              Select the <strong>pageguide</strong> folder from the downloaded and extracted zip files (this is the directory containing `manifest.json`).
+            </p>
+            <div class="step-image-wrap">
+              <img src="figures/load_extension/unzip_folder.png" class="step-img" alt="Select pageguide folder in files" />
+            </div>
+          </div>
+
+          <div class="manual-step-item">
+            <div class="step-tag">Step 5</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Click the Extension Icon</h3>
+            <p style="color: var(--muted); line-height: 1.75; font-size: 0.98rem; margin: 0 0 16px 0;">
+              Click the extensions puzzle icon in the top right toolbar.
+            </p>
+            <div class="step-image-wrap">
+              <img src="figures/load_extension/open_extension_icon.png" class="step-img" alt="Click Extension Icon" style="max-width: 450px;" />
+            </div>
+          </div>
+
+          <div class="manual-step-item">
+            <div class="step-tag">Step 6</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Pin the Extension Icon</h3>
+            <p style="color: var(--muted); line-height: 1.75; font-size: 0.98rem; margin: 0 0 16px 0;">
+              Pin the extension icon to your browser toolbar for quick access.
+            </p>
+            <div class="step-image-wrap">
+              <img src="figures/load_extension/pin_icon.png" class="step-img" alt="Pin the Extension Icon" style="max-width: 450px;" />
+            </div>
+          </div>
+
+          <div class="manual-step-item">
+            <div class="step-tag">Step 7</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Open & Use the Extension</h3>
+            <p style="color: var(--muted); line-height: 1.75; font-size: 0.98rem; margin: 0 0 16px 0;">
+              Activate the sidebar helper by clicking the pinned 🍊 icon in the toolbar.
+            </p>
+            <div class="step-image-wrap">
+              <img src="figures/load_extension/click_icon_to_use.png" class="step-img" alt="Use the Extension" style="max-width: 450px;" />
+            </div>
+          </div>
+
+          <hr style="border: 0; border-top: 1px solid var(--line); margin: 40px 0 32px 0;" />
+
+          <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Manual Upgrade Instructions</h3>
+          <ul style="padding-left: 20px; line-height: 1.8; color: var(--muted); font-size: 0.96rem;">
+            <li style="margin-bottom: 8px;">Download the <a href="https://github.com/tin-xai/pageguide/archive/refs/heads/master.zip" style="color: var(--accent); font-weight: 600;">latest source zip</a> file.</li>
+            <li style="margin-bottom: 8px;">Unzip and replace the contents of your existing local <strong>pageguide</strong> folder.</li>
+            <li style="margin-bottom: 8px;">Navigate back to <code>chrome://extensions/</code> and click the circular reload arrow icon on the PageGuide developer card.</li>
+          </ul>
+        </section>
       </main>
 
-      <footer class="footer" style="text-align: center; margin-top: 40px;">
-        <p>
-          <a href="index.html">← Back to PageGuide</a>
+      <footer class="footer" style="text-align: center; margin-top: 40px; border-top: 1px solid var(--line); padding-top: 24px;">
+        <p style="margin: 0;">
+          <a href="index.html" style="color: var(--muted); text-decoration: none; font-weight: bold; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">
+            ← Back to PageGuide Home
+          </a>
         </p>
       </footer>
     </div>
