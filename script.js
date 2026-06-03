@@ -98,16 +98,25 @@ activateMode("find");
 
 // Motivation carousel
 const track = document.getElementById("failureCarousel")?.querySelector(".carousel-track");
+const carouselViewport = document.getElementById("failureCarousel")?.querySelector(".carousel-viewport");
 const prevBtn = document.getElementById("carouselPrev");
 const nextBtn = document.getElementById("carouselNext");
 const dotsContainer = document.getElementById("carouselDots");
 
-if (track && prevBtn && nextBtn && dotsContainer) {
+if (track && carouselViewport && prevBtn && nextBtn && dotsContainer) {
   const slides = track.querySelectorAll(".carousel-slide");
   const total = slides.length;
   let current = 0;
 
   const labelBtns = dotsContainer.querySelectorAll(".carousel-label-btn");
+  const syncCarouselHeight = () => {
+    const activeSlide = slides[current];
+    if (!activeSlide) {
+      return;
+    }
+
+    carouselViewport.style.height = `${activeSlide.offsetHeight}px`;
+  };
 
   labelBtns.forEach((btn) => {
     btn.addEventListener("click", () => goTo(Number(btn.dataset.slide)));
@@ -116,6 +125,7 @@ if (track && prevBtn && nextBtn && dotsContainer) {
   function goTo(index) {
     current = index;
     track.style.transform = `translateX(-${current * 100}%)`;
+    syncCarouselHeight();
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current === total - 1;
     labelBtns.forEach((b, i) => b.classList.toggle("is-active", i === current));
@@ -123,6 +133,8 @@ if (track && prevBtn && nextBtn && dotsContainer) {
 
   prevBtn.addEventListener("click", () => goTo(current - 1));
   nextBtn.addEventListener("click", () => goTo(current + 1));
+  window.addEventListener("resize", syncCarouselHeight);
+  window.addEventListener("load", syncCarouselHeight);
   goTo(0);
 }
 
