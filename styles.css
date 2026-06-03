@@ -541,6 +541,8 @@ a.author-link:hover {
 
 .appendix-intro {
   text-align: left;
+  margin-left: 0;
+  margin-right: auto;
 }
 
 .appendix-summary-grid {
@@ -595,8 +597,8 @@ a.author-link:hover {
 }
 
 .model-badge img {
-  width: 1.05em;
   height: 1.05em;
+  width: auto;
   border-radius: 3px;
   object-fit: contain;
   flex: 0 0 auto;
