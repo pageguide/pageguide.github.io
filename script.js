@@ -3,7 +3,7 @@ const modePanels = document.querySelectorAll(".mode-panel, .mode-block[data-pane
 const navLinks = document.querySelectorAll(".nav a");
 const sections = document.querySelectorAll("main section[id]");
 const revealTargets = document.querySelectorAll(
-  ".hero, .callout, .modes-section, .framework-section, .results-section, .study-section, .impact-section"
+  ".hero, .callout, .modes-section, .framework-section, .results-section, .study-section, .impact-section, .appendix-section"
 );
 const countTargets = document.querySelectorAll("[data-count]");
 const barFills = document.querySelectorAll(".bar-fill");
@@ -136,6 +136,24 @@ promptPills.forEach((pill) => {
     promptPills.forEach((p) => p.classList.remove("is-active"));
     promptPanels.forEach((p) => p.classList.toggle("is-active", p.dataset.promptPanel === target));
     pill.classList.add("is-active");
+  });
+});
+
+// Appendix model performance tab switching
+const appendixPills = document.querySelectorAll(".appendix-pill");
+const appendixPanels = document.querySelectorAll(".appendix-panel");
+
+appendixPills.forEach((pill) => {
+  pill.addEventListener("click", () => {
+    const target = pill.dataset.appendix;
+    appendixPills.forEach((p) => {
+      const active = p.dataset.appendix === target;
+      p.classList.toggle("is-active", active);
+      p.setAttribute("aria-selected", active ? "true" : "false");
+    });
+    appendixPanels.forEach((panel) => {
+      panel.classList.toggle("is-active", panel.dataset.appendixPanel === target);
+    });
   });
 });
 

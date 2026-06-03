@@ -634,6 +634,206 @@
 
           </div>
         </section>
+
+        <h2 class="paper-section-title" id="model-performance">Appendix Model Performance</h2>
+        <p class="paper-section-intro appendix-intro">
+          Appendix D evaluates the model components behind PageGuide across routing, evidence finding,
+          guided task completion, and semantic hiding. Use the tabs to scan each finding without leaving
+          the main results page.
+        </p>
+
+        <section class="appendix-section">
+          <div class="appendix-summary-grid" aria-label="Appendix model performance highlights">
+            <div class="appendix-summary-card">
+              <span class="appendix-summary-label">Router</span>
+              <strong>97.68%</strong>
+              <span>overall intent accuracy</span>
+            </div>
+            <div class="appendix-summary-card">
+              <span class="appendix-summary-label">Find</span>
+              <strong>91.40%</strong>
+              <span>NQ answer correctness <span class="model-badge"><img src="figures/icons/gemini3flash.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash</span></span>
+            </div>
+            <div class="appendix-summary-card">
+              <span class="appendix-summary-label">QASPER</span>
+              <strong>38.76</strong>
+              <span>best average Find score <span class="model-badge"><img src="figures/icons/gemini3flash.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash</span></span>
+            </div>
+            <div class="appendix-summary-card">
+              <span class="appendix-summary-label">Guide</span>
+              <strong>35.17%</strong>
+              <span>Online-Mind2Web average success <span class="model-badge"><img src="figures/icons/gemini3flash.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash</span></span>
+            </div>
+            <div class="appendix-summary-card">
+              <span class="appendix-summary-label">Hide</span>
+              <strong>50.92</strong>
+              <span>average precision / recall / F1 <span class="model-badge"><img src="figures/icons/gemini3flash.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash</span></span>
+            </div>
+          </div>
+
+          <div class="appendix-tabs">
+            <div class="appendix-switch" role="tablist" aria-label="Appendix model performance findings">
+              <button class="appendix-pill appendix-pill-router is-active" data-appendix="router" role="tab" aria-selected="true">Intent Router</button>
+              <button class="appendix-pill appendix-pill-find" data-appendix="nq" role="tab" aria-selected="false">Find on NQ</button>
+              <button class="appendix-pill appendix-pill-find" data-appendix="qasper" role="tab" aria-selected="false">Find on QASPER</button>
+              <button class="appendix-pill appendix-pill-guide" data-appendix="guide" role="tab" aria-selected="false">Guide</button>
+              <button class="appendix-pill appendix-pill-hide" data-appendix="hide" role="tab" aria-selected="false">Hide</button>
+            </div>
+
+            <article class="appendix-panel is-active" data-appendix-panel="router" role="tabpanel">
+              <div class="appendix-panel-copy">
+                <span class="appendix-kicker">Table 1</span>
+                <h3>Intent routing is reliable across Find, Guide, and Hide.</h3>
+                <p>
+                  The router correctly classifies 1,180 of 1,208 queries. Guide queries are classified perfectly,
+                  while the remaining mistakes come from ambiguous Find and Hide requests.
+                </p>
+              </div>
+              <div class="appendix-table-wrap">
+                <table class="appendix-table">
+                  <thead>
+                    <tr>
+                      <th>Class</th>
+                      <th>Total</th>
+                      <th>Correct</th>
+                      <th>Accuracy</th>
+                      <th>Error Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Find</td><td>969</td><td>944</td><td>97.4%</td><td>Guide x 25</td></tr>
+                    <tr><td>Guide</td><td>132</td><td>132</td><td>100.0%</td><td>-</td></tr>
+                    <tr><td>Hide</td><td>107</td><td>104</td><td>97.2%</td><td>Find x 3</td></tr>
+                    <tr class="appendix-total-row"><td>Overall</td><td>1,208</td><td>1,180</td><td>97.68%</td><td>28 total</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="appendix-panel" data-appendix-panel="nq" role="tabpanel">
+              <div class="appendix-panel-copy">
+                <span class="appendix-kicker">Table 2</span>
+                <h3>Gemini 3 Flash improves NQ answer correctness.</h3>
+                <p>
+                  On Natural Questions, Gemini 3 Flash trades a small precision drop for higher recall,
+                  better F1, and a 12.91 point gain in answer correctness.
+                </p>
+              </div>
+              <div class="appendix-table-wrap">
+                <table class="appendix-table">
+                  <thead>
+                    <tr>
+                      <th>Model</th>
+                      <th>Precision</th>
+                      <th>Recall</th>
+                      <th>F1</th>
+                      <th>Ans. Correctness</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini3flash.png" alt="Gemini icon" />Gemini 2.5 Flash Preview</span></td><td>65.23</td><td>74.09</td><td>66.01</td><td>78.49</td></tr>
+                    <tr><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini3flash.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash Preview</span></td><td>63.97</td><td>83.17</td><td>68.66</td><td>91.40</td></tr>
+                    <tr class="appendix-delta-row"><td>Delta</td><td>-1.26</td><td>+9.08</td><td>+2.65</td><td>+12.91</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="appendix-panel" data-appendix-panel="qasper" role="tabpanel">
+              <div class="appendix-panel-copy">
+                <span class="appendix-kicker">Table 3</span>
+                <h3>Find improves evidence grounding on QASPER.</h3>
+                <p>
+                  Both PageGuide model variants improve over LED-base. Gemini 3 Flash gives the strongest average score,
+                  while Gemini 2.5 Flash has the highest evidence F1.
+                </p>
+              </div>
+              <div class="appendix-table-wrap">
+                <table class="appendix-table">
+                  <thead>
+                    <tr>
+                      <th>Model</th>
+                      <th>Answer F1</th>
+                      <th>Evidence F1</th>
+                      <th>Avg</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>LED-base (baseline)</td><td>33.63</td><td>29.85</td><td>31.74</td></tr>
+                    <tr><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini3flash.png" alt="Gemini icon" />Gemini 2.5 Flash Preview</span></td><td>33.82 (+0.19)</td><td>43.06 (+13.21)</td><td>38.44 (+6.70)</td></tr>
+                    <tr><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini3flash.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash Preview</span></td><td>39.72 (+6.09)</td><td>37.80 (+7.95)</td><td>38.76 (+7.02)</td></tr>
+                    <tr class="appendix-delta-row"><td>Delta</td><td>+5.90</td><td>-5.26</td><td>+0.32</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="appendix-panel" data-appendix-panel="guide" role="tabpanel">
+              <div class="appendix-panel-copy">
+                <span class="appendix-kicker">Table 4</span>
+                <h3>Guide performs best with Gemini 3 Flash.</h3>
+                <p>
+                  On Online-Mind2Web, PageGuide with Gemini 3 Flash improves across every difficulty split
+                  and exceeds the SeeAct baseline average by 5.17 points.
+                </p>
+              </div>
+              <div class="appendix-table-wrap">
+                <table class="appendix-table">
+                  <thead>
+                    <tr>
+                      <th>Agent</th>
+                      <th>Backbone</th>
+                      <th>Easy</th>
+                      <th>Medium</th>
+                      <th>Hard</th>
+                      <th>Avg</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>SeeAct</td><td>-</td><td>51.80</td><td>28.00</td><td>9.50</td><td>30.00</td></tr>
+                    <tr><td>PageGuide</td><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini3flash.png" alt="Gemini icon" />Gemini 2.5 Flash Preview</span></td><td>52.50</td><td>24.48</td><td>14.29</td><td>30.42</td></tr>
+                    <tr><td>PageGuide</td><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini3flash.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash Preview</span></td><td>60.76</td><td>26.57</td><td>18.18</td><td>35.17</td></tr>
+                    <tr class="appendix-delta-row"><td>Delta</td><td>Gemini 3 - 2.5</td><td>+8.26</td><td>+2.09</td><td>+3.89</td><td>+4.75</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="appendix-panel" data-appendix-panel="hide" role="tabpanel">
+              <div class="appendix-panel-copy">
+                <span class="appendix-kicker">Table 5</span>
+                <h3>Hide improves recall and overall hiding quality.</h3>
+                <p>
+                  On the self-collected dataset, Gemini 3 Flash identifies more query-matching elements,
+                  raising recall by 12.52 points and the average metric by 7.18 points.
+                </p>
+              </div>
+              <div class="appendix-table-wrap">
+                <table class="appendix-table">
+                  <thead>
+                    <tr>
+                      <th>Model</th>
+                      <th>Precision</th>
+                      <th>Recall</th>
+                      <th>F1</th>
+                      <th>Avg</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini3flash.png" alt="Gemini icon" />Gemini 2.5 Flash Preview</span></td><td>42.82</td><td>46.84</td><td>41.56</td><td>43.74</td></tr>
+                    <tr><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini3flash.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash Preview</span></td><td>45.98</td><td>59.36</td><td>47.42</td><td>50.92</td></tr>
+                    <tr class="appendix-delta-row"><td>Delta</td><td>+3.16</td><td>+12.52</td><td>+5.86</td><td>+7.18</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          </div>
+
+          <p class="appendix-note">
+            Source: Appendix D of the <a href="https://arxiv.org/html/2604.23772v2#A4" target="_blank" rel="noreferrer">PageGuide paper</a>.
+            Gemini model labels follow Appendix E; deltas compare Gemini 3 Flash Preview against Gemini 2.5 Flash Preview.
+          </p>
+        </section>
       </main>
 
       <h2 class="paper-section-title" id="bibtex">BibTeX</h2>
