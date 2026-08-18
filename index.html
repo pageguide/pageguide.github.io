@@ -61,6 +61,7 @@
               <span class="hero-mark-inline">🍊</span> PageGuide: Browser Extension to Assist Users in Navigating a Webpage
               and Locating Information
             </h1>
+            <p class="hero-claim">The first web agent that supports user verification by highlighting text spans and annotating image evidence.</p>
             <p class="hero-tagline">
               <span>🖍️ Highlights evidence in webpages and PDFs</span>
               <span>🗺️ Guides website navigation</span>
@@ -193,17 +194,18 @@
               <img src="figures/three_figures.png" class="paper-figure carousel-img" alt="Motivation: existing agents vs. PageGuide" />
               <p class="figure-caption">
                 <strong>Figure 1:</strong>
-                (a) Existing web agents can fail in three ways: by providing answers that cannot be verified from the page, failing
-                to highlight relevant page elements, or failing to hide content requested by the user. On the Amazon River Wikipedia page,
-                <img src="figures/icons/gpt_atlas.png" class="caption-icon" alt="ChatGPT Atlas icon" /><b>ChatGPT Atlas</b> returns the correct answer, but it does not highlight the supporting evidence on the page, making the response
-                difficult for the user to verify. On TradingView, <img src="figures/icons/gpt_atlas.png" class="caption-icon" alt="ChatGPT Atlas icon" /><b>ChatGPT Atlas</b> explains how to move the price scale but does not highlight
-                the relevant Settings icon on the chart. On Threads, <img src="figures/icons/gemini3flash.png" class="caption-icon" alt="Gemini Agent icon" /><b>Gemini Agent</b> cannot directly hide negative comments about Ronaldo
-                on the page. (b) In contrast, given a query in the agent side panel on the right (powered by <img src="figures/icons/gemini3flash.png" class="caption-icon" alt="Gemini icon" />Gemini-3-Flash), 🍊 <b>PageGuide</b>
+                (a) Existing web agents provide limited support for user verification. For example, on the Amazon River Wikipedia
+                page (A1), <img src="figures/icons/gpt_atlas.png" class="caption-icon" alt="ChatGPT Atlas icon" /><b>ChatGPT Atlas</b> returns the correct answer, but it does not highlight the supporting evidence on the page, making the response
+                difficult for the user to verify. On TradingView (A2), <img src="figures/icons/gpt_atlas.png" class="caption-icon" alt="ChatGPT Atlas icon" /><b>ChatGPT Atlas</b> explains how to move the price scale but does not highlight
+                the relevant Settings icon on the chart. On Map (A3), <img src="figures/icons/gemini3flash.png" class="caption-icon" alt="Gemini Agent icon" /><b>Gemini Agent</b> cannot point to the parking lot's location, making it
+                difficult for users to locate it on the dense map. (b) In contrast, in (B1), given a query in the agent side panel on the right, 🍊 <b>PageGuide</b>
                 displays the full answer with clickable references that navigate to the corresponding highlighted evidence on the page
                 (<em>e.g.,</em> the page will jump to the location of the
                 <span class="caption-highlight-pink">Nevado Mismi</span>
                 when clicking at
                 <span class="caption-highlight-dark">Nevado Mismi<sup>[1]</sup></span>).
+                In (B2), 🍊 <b>PageGuide</b> provides visual grounding for map-based answers by annotating both the response and the live page: it boxes
+                the target hall and parking lot and draws the walking direction between them, allowing users to directly locate and verify the answer on the map.
               </p>
             </div>
 
@@ -425,16 +427,13 @@
               <div class="mode-block-figure">
                 <img src="figures/guide_example.png" class="paper-figure" alt="Guide mode example" />
                 <p class="figure-caption">
-                  <strong>Figure 2:</strong> Given the query <em>"How to add ABC to this GitHub project?"</em>,
-                  <sc>PageGuide</sc> (powered by Gemini-3-Flash) generates a step-by-step plan and delivers it one step at a time.
-                  The target UI element is highlighted directly on the page
-                  (<em>e.g.,</em> <span class="caption-highlight-green">Settings</span>,
-                  <span class="caption-highlight-red">Collaborators</span>),
-                  while the sidebar panel shows the current instruction, the outcome hint, and
-                  <span class="caption-btn-next">Next</span> / <span class="caption-btn-stop">Stop</span> controls.
-                  The user always drives the pace: each step only advances when <em>Next</em> is explicitly clicked,
-                  keeping the user in full control, especially when verification is required
-                  (<em>e.g.,</em> entering a password or confirming the collaborator's account).
+                  <strong>Figure 2:</strong> Example of a <sc>Guide</sc> process. Given the query <em>"Find me a parking lot near ABC Hall"</em>,
+                  <sc>PageGuide</sc> generates a step-by-step plan and presents one instruction at a time.
+                  At each step, the target UI element is highlighted directly on the page
+                  (<em>e.g.,</em> <span class="caption-highlight-red">Search</span>), while the sidebar displays the corresponding instruction.
+                  When visual evidence is needed, <sc>PageGuide</sc> adds annotations (<em>e.g.,</em> boxes, arrows, or stars) directly
+                  to the page to guide users to the relevant location or element. Finally, <sc>PageGuide</sc> provides an answer with
+                  clickable references; selecting a reference navigates the page directly to the corresponding evidence.
                 </p>
               </div>
             </article>
