@@ -65,7 +65,6 @@
             <p class="hero-tagline">
               <span>🖍️ Highlights evidence in webpages and PDFs</span>
               <span>🗺️ Guides website navigation</span>
-              <span>🙈 Hides distracting content</span>
               <span>👁️ Answers visual questions</span>
             </p>
             <div class="hero-authors">
@@ -158,28 +157,30 @@
           <h2 class="paper-section-title">Abstract</h2>
           <article class="callout abstract-card abstract-card-full">
             <p>
-              Users browsing the web daily struggle to locate relevant information
-              on cluttered pages, complete unfamiliar multi-step tasks, and stay
-              focused amid distracting content. State-of-the-art AI assistants
-              and browser agents return answers without showing where information
-              comes from, forcing users to manually verify results and blindly
-              trust every automated step.
+              Users browsing the web daily struggle to quickly locate relevant
+              information in cluttered pages, and complete multi-step web
+              navigation tasks. State-of-the-art AI assistants (<em>e.g.,</em>
+              ChatGPT, Gemini, Claude) and browser agents (<em>e.g.,</em>
+              OpenAI Operator, Browser Use) can answer questions and automate
+              actions, yet they return answers without showing where the
+              information comes from on the page, forcing users to manually
+              verify results and blindly trust every automated step.
             </p>
             <p>
               We present <strong>🍊 PageGuide</strong>, a browser extension that
-              grounds LLM answers directly in the HTML DOM via visual overlays,
-              addressing three core user needs:
+              grounds LLM answers and actions not only in HTML DOM elements, but
+              also in non-HTML DOM content, such as maps, images, charts, and
+              timetables, addressing two core user needs:
             <ol class="abstract-list">
               <li><strong>Find</strong> — locating and highlighting relevant evidence in-situ so users can instantly verify answers on the page;</li>
-              <li><strong>Guide</strong> — showing step-by-step instructions one at a time so users can follow and perform actions by themselves;</li>
-              <li><strong>Hide</strong> — hiding distracting content with a per-element justification and a reviewable checklist.</li>
+              <li><strong>Guide</strong> — automatically guiding users through navigation tasks while capturing relevant evidence for each intermediate task.</li>
             </ol>
             </p>
             <p>
-              In a within-subject controlled user study (<em>N</em> = 94), PageGuide outperforms unaided browsing across all modes:
-              Hide accuracy improves by 26 percentage points and task time drops by 70%;
-              Guide completion rate increases by 30 percentage points;
-              and Find reduces Ctrl+F usage by 80% and task time by 19%.
+              In a within-subject user study (<em>N</em> = 53), PageGuide outperforms a non-grounding agent in both modes:
+              in Find, it improves accuracy from 90.1% to 96.3% and reduces judge time from 155.6s to 133.0s;
+              in Guide, it improves accuracy from 71.4% to 81.0%, with judge time rising from 70.4s to 109.8s
+              as users spend the extra time inspecting grounded evidence across navigation steps rather than believing the answer blindly.
             </p>
           </article>
         </section>
@@ -194,18 +195,17 @@
               <img src="figures/three_figures.png" class="paper-figure carousel-img" alt="Motivation: existing agents vs. PageGuide" />
               <p class="figure-caption">
                 <strong>Figure 1:</strong>
-                (a) Existing web agents provide limited support for user verification. For example, on the Amazon River Wikipedia
-                page (A1), <img src="figures/icons/gpt_atlas.png" class="caption-icon" alt="ChatGPT Atlas icon" /><b>ChatGPT Atlas</b> returns the correct answer, but it does not highlight the supporting evidence on the page, making the response
-                difficult for the user to verify. On TradingView (A2), <img src="figures/icons/gpt_atlas.png" class="caption-icon" alt="ChatGPT Atlas icon" /><b>ChatGPT Atlas</b> explains how to move the price scale but does not highlight
-                the relevant Settings icon on the chart. On Map (A3), <img src="figures/icons/gemini3flash.png" class="caption-icon" alt="Gemini Agent icon" /><b>Gemini Agent</b> cannot point to the parking lot's location, making it
-                difficult for users to locate it on the dense map. (b) In contrast, in (B1), given a query in the agent side panel on the right, 🍊 <b>PageGuide</b>
-                displays the full answer with clickable references that navigate to the corresponding highlighted evidence on the page
-                (<em>e.g.,</em> the page will jump to the location of the
+                Existing web agents provide limited support for user verification. For example, on the Wikipedia page (A1),
+                <img src="figures/icons/gpt_atlas.png" class="caption-icon" alt="ChatGPT Atlas icon" /><b>ChatGPT Atlas</b> returns the correct answer, but it does not highlight the supporting evidence on the page, making the response
+                difficult for the user to verify. In contrast, in (B1), 🍊 <b>PageGuide</b> shows the answer with clickable references and highlights the
+                corresponding evidence on the page (<em>e.g.,</em> clicking
+                <span class="caption-highlight-dark">Nevado Mismi<sup>[1]</sup></span>
+                jumps to the highlighted
                 <span class="caption-highlight-pink">Nevado Mismi</span>
-                when clicking at
-                <span class="caption-highlight-dark">Nevado Mismi<sup>[1]</sup></span>).
-                In (B2), 🍊 <b>PageGuide</b> provides visual grounding for map-based answers by annotating both the response and the live page: it boxes
-                the target hall and parking lot and draws the walking direction between them, allowing users to directly locate and verify the answer on the map.
+                on the page). Similarly, in (A2), on Map, <img src="figures/icons/gemini3flash.png" class="caption-icon" alt="Gemini Agent icon" /><b>Gemini Agent</b> (Gemini 3.0 Flash) cannot point to the parking lot's location, making it
+                difficult for users to locate it on the dense map. In contrast, in (B2), 🍊 <b>PageGuide</b> provides visual grounding by annotating both the
+                response and the page: it boxes the target hall and parking lot and draws the relation between them, allowing users to directly locate
+                and verify the answer on the map.
               </p>
             </div>
 
@@ -222,11 +222,6 @@
             <div class="carousel-slide">
               <img src="figures/extension_failures/browseruse.png" class="paper-figure carousel-img" alt="Browser Use failure case" />
               <p class="figure-caption"><strong>Browser Use.</strong> Autonomously executes actions without showing where each step is performed on the page — users cannot verify or intervene at each stage.</p>
-            </div>
-
-            <div class="carousel-slide">
-              <img src="figures/extension_failures/gemini_agent.png" class="paper-figure carousel-img" alt="Gemini Agent failure case" />
-              <p class="figure-caption"><strong>Gemini Agent.</strong> Cannot directly hide specific content requested by the user; the page remains unchanged after the request.</p>
             </div>
 
             <div class="carousel-slide">
@@ -253,9 +248,8 @@
               <button class="carousel-label-btn" data-slide="1">ChatGPT Atlas</button>
               <button class="carousel-label-btn" data-slide="2">ChatGPT Atlas</button>
               <button class="carousel-label-btn" data-slide="3">Browser Use</button>
-              <button class="carousel-label-btn" data-slide="4">Gemini Agent</button>
-              <button class="carousel-label-btn" data-slide="5">Molmo Web</button>
-              <button class="carousel-label-btn" data-slide="6">In the Wild</button>
+              <button class="carousel-label-btn" data-slide="4">Molmo Web</button>
+              <button class="carousel-label-btn" data-slide="5">In the Wild</button>
             </div>
             <button class="carousel-btn" id="carouselNext" aria-label="Next">&#8594;</button>
           </div>
@@ -264,18 +258,16 @@
         <div class="realworld-highlight" id="videos">
           <div class="realworld-label">🍊 See it in action</div>
           <h2 class="paper-section-title realworld-title">Real-world Application</h2>
-          <p class="paper-section-intro realworld-intro">Watch PageGuide ground LLM answers directly on live pages — highlighting evidence, guiding steps, hiding clutter, reading PDFs, and answering visual questions.</p>
+          <p class="paper-section-intro realworld-intro">Watch PageGuide ground LLM answers directly on live pages — highlighting evidence, guiding steps, reading PDFs, and answering visual questions.</p>
           <div class="video-switch">
             <button class="video-pill video-pill-find is-active" data-video="find">Find</button>
             <button class="video-pill video-pill-guide" data-video="guide">Guide</button>
-            <button class="video-pill video-pill-hide" data-video="hide">Hide</button>
             <button class="video-pill video-pill-pdf" data-video="pdf">PDF Reading</button>
             <button class="video-pill video-pill-vqa" data-video="vqa">Visual Q&amp;A</button>
           </div>
           <div class="video-stage" id="demo-videos-container">
             <video class="video-player is-active" data-video-panel="find" src="videos/find.mp4" controls loop playsinline muted></video>
             <video class="video-player" data-video-panel="guide" src="videos/guide.mp4" controls loop playsinline muted></video>
-            <video class="video-player" data-video-panel="hide" src="videos/hide.mp4" controls loop playsinline muted></video>
             <video class="video-player" data-video-panel="pdf" src="videos/pdf_asking.mp4" controls loop playsinline muted></video>
             <video class="video-player" data-video-panel="vqa" src="videos/visual_asking.mp4" controls loop playsinline muted></video>
           </div>
@@ -284,34 +276,28 @@
         <section class="modes-section" id="modes">
           <h2 class="paper-section-title section-title-left">Method</h2>
           <p class="paper-section-intro section-intro-left">
-            PageGuide offers three interaction modes, each targeting a distinct user need.
-            A lightweight intent router classifies each query and dispatches it to the appropriate handler,
-            which reads the live HTML DOM and performs a grounded action directly on the page.
+            PageGuide offers two interaction modes, each targeting a distinct user need.
+            A lightweight intent router classifies each query and dispatches it to the appropriate handler
+            (<sc>Find</sc> or <sc>Guide</sc>), which reads the live HTML DOM and non-HTML DOM content
+            to ground its answer and evidence directly on the page.
           </p>
 
           <!-- System overview figure -->
           <div class="method-workflow">
             <img
-              src="figures/workflow_v2.png"
+              src="figures/workflow_trajectory.png"
               class="paper-figure method-workflow-img"
-              alt="PageGuide system workflow"
+              alt="PageGuide executing a task while keeping users in the process"
             />
             <p class="figure-caption">
-              <strong>Figure 4:</strong> Given a user query, the Router assigns it to one of
-              three handlers, after which the agent reads the HTML DOM
-              and produces the corresponding final state. (a) <sc>Find</sc>
-              (<span class="caption-arrow caption-arrow-find">——▶</span>): for
-              factual lookup queries (<em>e.g., "How many episodes in the movie Stranger Things?"</em>),
-              the agent locates supporting evidence spans; the final state highlights relevant elements directly
-              on the page (<em>e.g.,</em> <span class="caption-highlight-yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span>).
-              (b) <sc>Guide</sc> (<span class="caption-arrow caption-arrow-guide">——▶</span>): for navigation queries
-              (<em>e.g., "How do I change my password?"</em>), the agent iteratively
-              generates actions and incorporates feedback; the final state
-              is the target page reached after completing the steps (<em>e.g.,</em> the
-              Change Password form). (c) <sc>Hide</sc> (<span class="caption-arrow caption-arrow-hide">——▶</span>): for content-hiding
-              queries (<em>e.g., "Hide political posts"</em>), the agent scores HTML
-              DOM elements based on the user's intent; the final state hides
-              the matched elements on the page.
+              <strong>Figure 3:</strong> <sc>PageGuide</sc> executes the task while keeping users in the process and showing
+              verifiable evidence throughout the trajectory. Given the query <em>"Find when Rec Center closes on Friday.
+              Then order a banana on the grocery app for delivery after it closes."</em>, (1) <sc>PageGuide</sc> first finds
+              the Rec Center's Friday closing time and highlights the supporting evidence on the page. (2) Before proceeding,
+              <sc>PageGuide</sc> pauses for user confirmation. (3) After approval, <sc>PageGuide</sc> navigates the grocery app,
+              selects a banana, and schedules delivery for a valid time after the Rec Center closes. (4) <sc>PageGuide</sc>
+              presents the complete trajectory together with the textual and visual evidence supporting each step, enabling
+              the user to verify the final answer.
             </p>
           </div>
 
@@ -321,19 +307,17 @@
               <button class="prompt-pill prompt-pill-router is-active" data-prompt="router">Router Prompt (Condensed)</button>
               <button class="prompt-pill prompt-pill-find" data-prompt="find">Find Prompt (Condensed)</button>
               <button class="prompt-pill prompt-pill-guide" data-prompt="guide">Guide Prompt (Condensed)</button>
-              <button class="prompt-pill prompt-pill-hide" data-prompt="hide">Hide Prompt (Condensed)</button>
               <a class="prompt-paper-link" href="#" target="_blank" rel="noreferrer">See full prompts in the paper →</a>
             </div>
 
             <div class="prompt-panel is-active" data-prompt-panel="router">
               <div class="prompt-box prompt-box-router">
-                <p><span class="prompt-role">System:</span> Given a user query and a brief page context, classify the query into one of three handlers: <code>find</code> (factual lookup), <code>guide</code> (step-by-step task), or <code>hide</code> (content hiding). Return a JSON object with the handler, confidence score, and a one-sentence justification.</p>
+                <p><span class="prompt-role">System:</span> Given a user query and a brief page context, classify the query into one of two handlers: <code>find</code> (factual lookup) or <code>guide</code> (step-by-step task). Return a JSON object with the handler, confidence score, and a one-sentence justification.</p>
                 <p><span class="prompt-role">User:</span> Query: <em>"{query}"</em> &nbsp; Page context: <em>{page_title, content_type}</em></p>
                 <div class="prompt-example prompt-example-router">
                   <span class="prompt-example-label">Examples</span>
                   <p><em>"What is the price of this product?"</em><br>→ <code>{"handler": "find", "confidence": 0.9, "reason": "Question about page content"}</code></p>
                   <p><em>"How do I report this video?"</em><br>→ <code>{"handler": "guide", "confidence": 0.9, "reason": "How-to question needing step-by-step guidance"}</code></p>
-                  <p><em>"Hide the ads on this page"</em><br>→ <code>{"handler": "hide", "confidence": 0.95, "reason": "Request to hide ads"}</code></p>
                 </div>
               </div>
             </div>
@@ -365,18 +349,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="prompt-panel" data-prompt-panel="hide">
-              <div class="prompt-box prompt-box-hide">
-                <p><span class="prompt-role">System:</span> Given a hiding request and a structured HTML DOM element index, identify all elements that match the user's intent. For each matched element, return: (1) the element index, (2) a one-sentence justification, and (3) a short content snippet. Return at most 15 items; pick the most prominent if more match.</p>
-                <p><span class="prompt-role">User:</span> Request: <em>"{query}"</em> &nbsp; HTML DOM index: <em>{element_id, text, tag, bbox}</em></p>
-                <div class="prompt-example prompt-example-hide">
-                  <span class="prompt-example-label">Example</span>
-                  <p><em>Request: "Hide the ads on this page"</em><br>
-                  → <code>{"found": [{"index": 12, "reason": "Sponsored post marked as 'Ad'", "snippet": "Limited-time offer: Get 30% off today."}, {"index": 47, "reason": "Promoted banner advertisement", "snippet": "Shop now — exclusive deal"}], "message": "Found 2 advertisement elements on the page"}</code></p>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- Tab buttons -->
@@ -384,7 +356,6 @@
             <button class="mode-pill is-active" data-mode="find" role="tab">Find Example</button>
             <button class="mode-pill" data-mode="guide" role="tab">Guide Example 1</button>
             <button class="mode-pill" data-mode="guide2" role="tab">Guide Example 2</button>
-            <button class="mode-pill" data-mode="hide" role="tab">Hide Example</button>
             <button class="mode-pill mode-pill-pdf" data-mode="pdf" role="tab">
               <svg class="mode-pill-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4"/><path d="M6 9h4M6 12h6M6 15h4"/></svg>
               PDF Reading
@@ -457,23 +428,6 @@
               </div>
             </article>
 
-            <!-- Hide -->
-            <article class="mode-block" data-panel="hide">
-              <div class="mode-block-copy">
-                <h3>Remove distractions with a transparent, reviewable process</h3>
-              </div>
-              <div class="mode-block-figure">
-                <img src="figures/hide_example_2.png" class="paper-figure" alt="Hide mode example" />
-                <p class="figure-caption">
-                  <strong>Figure 3:</strong> On social platforms such as X.com, users often encounter repetitive or distracting content.
-                  Given the query <em>"Can you hide advertisements?"</em>,
-                  <sc>PageGuide</sc> identifies matching HTML DOM elements and surfaces a summary pop-up on the right
-                  listing the detected items. The user can review and confirm the selection before the action is applied—each confirmed element
-                  is hidden via CSS <span class="caption-code-red">display:none</span>, keeping the surrounding layout intact.
-                </p>
-              </div>
-            </article>
-
             <!-- PDF Reading -->
             <article class="mode-block" data-panel="pdf">
               <div class="mode-block-copy">
@@ -528,11 +482,12 @@
         <section class="results-section" id="results">
           <h2 class="paper-section-title section-title-left">User Study</h2>
           <p class="paper-section-intro section-intro-left">
-            We conducted a within-subject controlled study (<em>N</em> = 94) on real websites,
+            We conducted a within-subject controlled study (<em>N</em> = 53) using Gemini-3-Flash as PageGuide's backbone,
+            comparing a non-grounded condition (highlights and references turned off) against the grounded PageGuide condition,
             with counterbalanced ordering to mitigate learning effects.
-            Each participant completed 6 tasks (2 per mode) under both a control condition
-            (standard browser tools) and an extension condition.
-            We measured task accuracy, completion time, and behavioral signals (Ctrl+F, clicks, scrolls).
+            Each participant completed eight tasks across four task types — <sc>Find</sc> (Text Evidence), <sc>Find</sc> (Visual Evidence),
+            <sc>Guide</sc> (Text Evidence), and <sc>Guide</sc> (Visual Evidence) — with a maximum of three minutes per task.
+            We measured task accuracy, verification time, and mouse hovering behavioral signal, plus post-task Likert ratings.
           </p>
           <p class="study-data-link">
             <a href="https://github.com/tin-xai/pageguide/tree/analyze_userstudy" target="_blank" rel="noreferrer">
@@ -550,89 +505,48 @@
                 <img
                   src="figures/overall_accuracy.png"
                   class="paper-figure paper-figure-wide"
-                  alt="Task accuracy across modes"
+                  alt="Task accuracy across Find and Guide, text and visual evidence"
                 />
                 <p class="figure-caption">
-                  <strong>Figure 5:</strong> Task performance comparing control and extension conditions across all three features.
-                  <sc>Find</sc> and <sc>Guide</sc> are evaluated by accuracy (proportion of correctly completed tasks);
-                  <sc>Hide</sc> is evaluated by accuracy (proportion of target elements correctly identified).
-                  <sc>PageGuide</sc> improves performance in all features: <sc>Find</sc> (0.81 → 0.86),
-                  <sc>Guide</sc> (0.23 → 0.53), and <sc>Hide</sc> accuracy (0.30 → 0.56),
-                  with the largest gains in <sc>Guide</sc> and <sc>Hide</sc>.
+                  <strong>Figure 4:</strong> Task accuracy comparing non-grounded and grounded (<sc>PageGuide</sc>) conditions
+                  across <sc>Find</sc> and <sc>Guide</sc> tasks. Text-evidence tasks require verification using textual content,
+                  while visual-evidence tasks require verification using visually rendered content such as images, maps, or charts.
+                  <sc>PageGuide</sc> improves accuracy across all four task types, with larger gains for <sc>Guide</sc>
+                  tasks (0.71 → 0.81) than for <sc>Find</sc> tasks (0.90 → 0.96).
                 </p>
               </div>
             </div>
 
-            <!-- Row 2: Task completion time -->
+            <!-- Row 2: Verification time -->
             <div class="results-figure-row">
               <div class="results-figure-item results-figure-wide">
                 <img
                   src="figures/completion_time_plot.png"
                   class="paper-figure paper-figure-wide"
-                  alt="Task completion time comparison"
+                  alt="Verification time across Find and Guide, text and visual evidence"
                 />
                 <p class="figure-caption">
-                  <strong>Figure 6:</strong> Task completion time (seconds) for the control and extension conditions,
-                  restricted to correctly completed tasks. Each box shows the median and interquartile range across participants.
-                  <sc>PageGuide</sc> reduces completion time across all three features:
-                  <sc>Find</sc> (65.2s → 52.8s), <sc>Hide</sc> (104s → 31.7s), and <sc>Guide</sc> (95.8s → 66.7s),
-                  with the largest gain observed in <sc>Hide</sc>.
+                  <strong>Figure 5:</strong> Verification time (seconds) for the non-grounded and grounded (<sc>PageGuide</sc>) conditions.
+                  <sc>PageGuide</sc> reduces <sc>Find</sc> verification time (155.6s → 133.0s) but significantly increases <sc>Guide</sc>
+                  judge time (70.4s → 109.8s), reflecting deliberation spent inspecting grounded evidence rather than inefficiency.
                 </p>
               </div>
             </div>
 
-            <!-- Row 2: Behavioral signals overall -->
-            <div class="results-figure-row">
-              <div class="results-figure-item results-figure-wide">
-                <img
-                  src="figures/behavioral_overview.png"
-                  class="paper-figure paper-figure-wide"
-                  alt="Behavioral signals overview"
-                />
-                <p class="figure-caption">
-                  <strong>Figure 7:</strong> Behavioral signals (mean ± SE) comparing the control and extension conditions.
-                  Each bar shows the average count or distance per task for five metrics: Ctrl+F presses, text selections,
-                  mouse clicks, scroll count, and mouse movement distance. All five metrics decrease substantially with
-                  <sc>PageGuide</sc>, indicating that users rely less on manual search and perform fewer interactions
-                  to complete the same tasks.
-                </p>
-              </div>
-            </div>
-
-            <!-- Row 3: Behavioral signals by task type -->
-            <div class="results-figure-row">
-              <div class="results-figure-item results-figure-wide">
-                <img
-                  src="figures/behavioral_by_task.png"
-                  class="paper-figure paper-figure-wide"
-                  alt="Behavioral signals by task type"
-                />
-                <p class="figure-caption">
-                  <strong>Figure 8:</strong> Behavioral metrics (mean ± SE) broken down by task type
-                  (<sc>Find</sc>, <sc>Guide</sc>, <sc>Hide</sc>) and condition. While <sc>Find</sc> and <sc>Hide</sc>
-                  show consistent reductions across all signals, <sc>Guide</sc> shows a different pattern:
-                  page visits and mouse movement distance increase with <sc>PageGuide</sc>, reflecting that
-                  the extension actively guides users to navigate to new pages as part of the task.
-                </p>
-              </div>
-            </div>
-
-            <!-- Row 4: Likert ratings -->
+            <!-- Row 3: Likert ratings -->
             <div class="results-figure-row">
               <div class="results-figure-item results-figure-wide">
                 <img
                   src="figures/survey_diverging_likert.png"
                   class="paper-figure paper-figure-wide"
-                  alt="Post-study Likert ratings"
+                  alt="Post-study Likert ratings for Find and Guide"
                 />
                 <p class="figure-caption">
-                  <strong>Figure 9:</strong> Post-study Likert ratings (1 = Strongly Disagree, 7 = Strongly Agree)
-                  for each interaction mode. Each mode includes three questions: whether <sc>PageGuide</sc> is accurate
-                  or gives correct guidance (F1/G1), whether it makes the task easier (F2/G2/H2), and whether the task
-                  would be difficult to complete without it (F3/G3/H3). Bars extending to the right indicate agreement.
-                  <sc>Find</sc> and <sc>Hide</sc> show the most concentrated positive distributions
-                  (89–91% agreement on ease of use), while <sc>Guide</sc> shows slightly more variance,
-                  reflecting the added complexity of multi-step procedural tasks.
+                  <strong>Figure 6:</strong> Post-study Likert ratings show that users find both <sc>Find</sc> and <sc>Guide</sc> helpful
+                  for completing tasks, verifying supporting evidence, and identifying agent errors. Each mode includes three questions
+                  measuring whether <sc>PageGuide</sc> helps users identify relevant evidence or errors (F1/G1), makes the task easier
+                  to complete (F2/G3), and supports confidence in the agent's answer or task completion (F3/G2). Higher ratings indicate
+                  more positive perceptions.
                 </p>
               </div>
             </div>
@@ -644,14 +558,14 @@
           <h2 class="paper-section-title appendix-title">Appendix Model Performance</h2>
           <p class="paper-section-intro appendix-intro">
             Appendix D evaluates the model components behind PageGuide across routing, evidence finding,
-            guided task completion, and semantic hiding. Use the tabs to scan each finding without leaving
+            and guided task completion. Use the tabs to scan each finding without leaving
             the main results page.
           </p>
 
           <div class="appendix-summary-grid" aria-label="Appendix model performance highlights">
             <div class="appendix-summary-card">
               <span class="appendix-summary-label">Router</span>
-              <strong>97.68%</strong>
+              <strong>97.73%</strong>
               <span>overall intent accuracy</span>
             </div>
             <div class="appendix-summary-card">
@@ -669,11 +583,6 @@
               <strong>35.17%</strong>
               <span>Online-Mind2Web average success <span class="model-badge"><img src="figures/icons/gemini3flash_paper.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash</span></span>
             </div>
-            <div class="appendix-summary-card">
-              <span class="appendix-summary-label">Hide</span>
-              <strong>50.92</strong>
-              <span>average precision / recall / F1 <span class="model-badge"><img src="figures/icons/gemini3flash_paper.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash</span></span>
-            </div>
           </div>
 
           <div class="appendix-tabs">
@@ -682,16 +591,15 @@
               <button class="appendix-pill appendix-pill-find" data-appendix="nq" role="tab" aria-selected="false">Find on NQ</button>
               <button class="appendix-pill appendix-pill-find" data-appendix="qasper" role="tab" aria-selected="false">Find on QASPER</button>
               <button class="appendix-pill appendix-pill-guide" data-appendix="guide" role="tab" aria-selected="false">Guide</button>
-              <button class="appendix-pill appendix-pill-hide" data-appendix="hide" role="tab" aria-selected="false">Hide</button>
             </div>
 
             <article class="appendix-panel is-active" data-appendix-panel="router" role="tabpanel">
               <div class="appendix-panel-copy">
                 <span class="appendix-kicker">Table 1</span>
-                <h3>Intent routing is reliable across Find, Guide, and Hide.</h3>
+                <h3>Intent routing is reliable across Find and Guide.</h3>
                 <p>
-                  The router correctly classifies 1,180 of 1,208 queries. Guide queries are classified perfectly,
-                  while the remaining mistakes come from ambiguous Find and Hide requests.
+                  The router correctly classifies 1,076 of 1,101 queries. Guide queries are classified perfectly,
+                  while the remaining mistakes come from ambiguous Find requests.
                 </p>
               </div>
               <div class="appendix-table-wrap">
@@ -708,8 +616,7 @@
                   <tbody>
                     <tr><td>Find</td><td>969</td><td>944</td><td>97.4%</td><td>Guide x 25</td></tr>
                     <tr><td>Guide</td><td>132</td><td>132</td><td>100.0%</td><td>-</td></tr>
-                    <tr><td>Hide</td><td>107</td><td>104</td><td>97.2%</td><td>Find x 3</td></tr>
-                    <tr class="appendix-total-row"><td>Overall</td><td>1,208</td><td>1,180</td><td>97.68%</td><td>28 total</td></tr>
+                    <tr class="appendix-total-row"><td>Overall</td><td>1,101</td><td>1,076</td><td>97.73%</td><td>25 total</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -799,35 +706,6 @@
                     <tr><td>PageGuide</td><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini25flash.png" alt="Gemini 2.5 Flash icon" />Gemini 2.5 Flash</span></td><td>52.50</td><td>24.48</td><td>14.29</td><td>30.42</td></tr>
                     <tr><td>PageGuide</td><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini3flash_paper.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash</span></td><td>60.76</td><td>26.57</td><td>18.18</td><td>35.17</td></tr>
                     <tr class="appendix-delta-row"><td>Delta</td><td>Gemini 3 - 2.5</td><td>+8.26</td><td>+2.09</td><td>+3.89</td><td>+4.75</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </article>
-
-            <article class="appendix-panel" data-appendix-panel="hide" role="tabpanel">
-              <div class="appendix-panel-copy">
-                <span class="appendix-kicker">Table 5</span>
-                <h3>Hide improves recall and overall hiding quality.</h3>
-                <p>
-                  On the self-collected dataset, Gemini 3 Flash identifies more query-matching elements,
-                  raising recall by 12.52 points and the average metric by 7.18 points.
-                </p>
-              </div>
-              <div class="appendix-table-wrap">
-                <table class="appendix-table">
-                  <thead>
-                    <tr>
-                      <th>Model</th>
-                      <th>Precision</th>
-                      <th>Recall</th>
-                      <th>F1</th>
-                      <th>Avg</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini25flash.png" alt="Gemini 2.5 Flash icon" />Gemini 2.5 Flash</span></td><td>42.82</td><td>46.84</td><td>41.56</td><td>43.74</td></tr>
-                    <tr><td><span class="model-badge model-badge-table"><img src="figures/icons/gemini3flash_paper.png" alt="Gemini 3 Flash icon" />Gemini 3 Flash</span></td><td>45.98</td><td>59.36</td><td>47.42</td><td>50.92</td></tr>
-                    <tr class="appendix-delta-row"><td>Delta</td><td>+3.16</td><td>+12.52</td><td>+5.86</td><td>+7.18</td></tr>
                   </tbody>
                 </table>
               </div>
