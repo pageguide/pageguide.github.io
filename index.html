@@ -122,12 +122,13 @@
         </section>
 
         <!-- Demo video + tweet side by side -->
+         <!-- src="https://www.youtube.com/embed/WKfmqtED82s?enablejsapi=1&modestbranding=1&rel=0" -->
         <div class="video-tweet-row">
           <div class="video-tweet-video">
             <iframe
               id="youtube-demo"
               style="width: 100%; aspect-ratio: 1.85/1; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
-              src="https://www.youtube.com/embed/WKfmqtED82s?enablejsapi=1&modestbranding=1&rel=0"
+              src="videos/demo_video_pageguide_new.mp4"
               title="PageGuide: Browser Extension to Assist Users in Navigating a Webpage and Locating Information"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -260,14 +261,14 @@
           <h2 class="paper-section-title realworld-title">Real-world Application</h2>
           <p class="paper-section-intro realworld-intro">Watch PageGuide ground LLM answers directly on live pages — highlighting evidence, guiding steps, reading PDFs, and answering visual questions.</p>
           <div class="video-switch">
-            <button class="video-pill video-pill-find is-active" data-video="find">Find</button>
-            <button class="video-pill video-pill-guide" data-video="guide">Guide</button>
+            <button class="video-pill video-pill-guide is-active" data-video="guide">Guide</button>
+            <button class="video-pill video-pill-find" data-video="find">Find</button>
             <button class="video-pill video-pill-pdf" data-video="pdf">PDF Reading</button>
             <button class="video-pill video-pill-vqa" data-video="vqa">Visual Q&amp;A</button>
           </div>
           <div class="video-stage" id="demo-videos-container">
-            <video class="video-player is-active" data-video-panel="find" src="videos/find.mp4" controls loop playsinline muted></video>
-            <video class="video-player" data-video-panel="guide" src="videos/guide.mp4" controls loop playsinline muted></video>
+            <img class="video-player is-active" data-video-panel="guide" src="figures/guide_realworld.gif" alt="Guide mode real-world demo" />
+            <video class="video-player" data-video-panel="find" src="videos/find.mp4" controls loop playsinline muted></video>
             <video class="video-player" data-video-panel="pdf" src="videos/pdf_asking.mp4" controls loop playsinline muted></video>
             <video class="video-player" data-video-panel="vqa" src="videos/visual_asking.mp4" controls loop playsinline muted></video>
           </div>
