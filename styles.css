@@ -1866,6 +1866,12 @@ sc {
   margin: 0 0 8px 4px;
 }
 
+.video-tweet-label.video-title {
+  justify-content: center;
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+}
+
 .video-tweet-dot {
   display: inline-block;
   width: 7px;
