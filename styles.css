@@ -801,6 +801,61 @@ a.author-link:hover {
   border-bottom-color: var(--ink);
 }
 
+/* ── User Notes ───────────────────────────────────── */
+.user-notes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  max-width: 1040px;
+  margin: 0 auto 40px;
+}
+
+.user-notes-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.user-notes-col-label {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+.user-notes-col-label-grounded { color: #2f9e5c; }
+.user-notes-col-label-nongrounded { color: #c0431a; }
+
+.user-note {
+  margin: 0;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 3px solid transparent;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.user-note-grounded {
+  border-left-color: #2f9e5c;
+}
+
+.user-note-nongrounded {
+  border-left-color: #c0431a;
+}
+
+@media (max-width: 680px) {
+  .user-notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 800px) {
   .appendix-section {
     padding: 24px 22px 28px;
