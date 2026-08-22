@@ -802,57 +802,75 @@ a.author-link:hover {
 }
 
 /* ── User Notes ───────────────────────────────────── */
-.user-notes-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
+.user-notes-masonry {
+  column-count: 2;
+  column-gap: 14px;
   max-width: 1040px;
   margin: 0 auto 40px;
 }
 
-.user-notes-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.user-notes-col-label {
-  font-family: var(--sans);
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 2px;
-}
-
-.user-notes-col-label-grounded { color: #2f9e5c; }
-.user-notes-col-label-nongrounded { color: #c0431a; }
-
 .user-note {
-  margin: 0;
-  padding: 14px 18px;
+  position: relative;
+  display: block;
+  break-inside: avoid;
+  margin: 0 0 14px;
+  padding: 16px 16px 14px 20px;
   border-radius: 12px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-left: 3px solid transparent;
+  overflow: hidden;
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1rem;
-  line-height: 1.55;
+  font-size: 0.96rem;
+  line-height: 1.5;
   color: var(--ink);
 }
 
-.user-note-grounded {
-  border-left-color: #2f9e5c;
+.user-note::before {
+  content: "\201C";
+  position: absolute;
+  top: -0.28em;
+  right: 10px;
+  font-family: var(--serif);
+  font-style: normal;
+  font-size: 3.4rem;
+  line-height: 1;
+  opacity: 0.1;
+  pointer-events: none;
 }
+
+.user-note-tag {
+  display: inline-block;
+  float: left;
+  margin: 1px 8px 4px 0;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+
+.user-note-grounded {
+  background: rgba(47, 158, 92, 0.08);
+  border: 1px solid rgba(47, 158, 92, 0.22);
+}
+
+.user-note-grounded::before { color: #2f9e5c; }
+.user-note-grounded .user-note-tag { background: #2f9e5c; }
 
 .user-note-nongrounded {
-  border-left-color: #c0431a;
+  background: rgba(192, 67, 26, 0.06);
+  border: 1px solid rgba(192, 67, 26, 0.2);
 }
 
+.user-note-nongrounded::before { color: #c0431a; }
+.user-note-nongrounded .user-note-tag { background: #c0431a; }
+
 @media (max-width: 680px) {
-  .user-notes-grid {
-    grid-template-columns: 1fr;
+  .user-notes-masonry {
+    column-count: 1;
   }
 }
 
