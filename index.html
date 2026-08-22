@@ -353,8 +353,8 @@
 
           <!-- Tab buttons -->
           <div class="mode-switch" role="tablist" aria-label="PageGuide modes">
-            <button class="mode-pill is-active" data-mode="find" role="tab">Find Example</button>
-            <button class="mode-pill" data-mode="guide" role="tab">Guide Example 1</button>
+            <button class="mode-pill is-active" data-mode="guide" role="tab">Guide Example 1</button>
+            <button class="mode-pill" data-mode="find" role="tab">Find Example</button>
             <button class="mode-pill" data-mode="guide2" role="tab">Guide Example 2</button>
             <button class="mode-pill mode-pill-pdf" data-mode="pdf" role="tab">
               <svg class="mode-pill-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4"/><path d="M6 9h4M6 12h6M6 15h4"/></svg>
@@ -371,27 +371,8 @@
           </div>
 
           <div class="mode-stage">
-            <!-- Find -->
-            <article class="mode-block is-active" data-panel="find">
-              <div class="mode-block-copy">
-                <h3>Show the exact evidence behind every answer</h3>
-              </div>
-              <div class="mode-block-figure">
-                <img src="figures/find_example.png" class="paper-figure" alt="Find mode example" />
-                <p class="figure-caption">
-                  <strong>Figure 1:</strong>
-                Given a query in the agent side panel on the right (powered by Gemini-3-Flash), PageGuide
-                displays the full answer with clickable references that navigate to the corresponding highlighted evidence on the page
-                (<em>e.g.,</em> the page will jump to the location of the
-                <span class="caption-highlight-pink">Nevado Mismi</span>
-                when clicking at
-                <span class="caption-highlight-dark">Nevado Mismi<sup>[1]</sup></span>).
-                </p>
-              </div>
-            </article>
-
             <!-- Guide -->
-            <article class="mode-block" data-panel="guide">
+            <article class="mode-block is-active" data-panel="guide">
               <div class="mode-block-copy">
                 <h3>Step-by-step help while the user stays in control</h3>
               </div>
@@ -405,6 +386,25 @@
                   When visual evidence is needed, <sc>PageGuide</sc> adds annotations (<em>e.g.,</em> boxes, arrows, or stars) directly
                   to the page to guide users to the relevant location or element. Finally, <sc>PageGuide</sc> provides an answer with
                   clickable references; selecting a reference navigates the page directly to the corresponding evidence.
+                </p>
+              </div>
+            </article>
+
+            <!-- Find -->
+            <article class="mode-block" data-panel="find">
+              <div class="mode-block-copy">
+                <h3>Show the exact evidence behind every answer</h3>
+              </div>
+              <div class="mode-block-figure">
+                <img src="figures/find_example.png" class="paper-figure" alt="Find mode example" />
+                <p class="figure-caption">
+                  <strong>Figure 1:</strong>
+                Given a query in the agent side panel on the right (powered by Gemini-3-Flash), PageGuide
+                displays the full answer with clickable references that navigate to the corresponding highlighted evidence on the page
+                (<em>e.g.,</em> the page will jump to the location of the
+                <span class="caption-highlight-pink">Nevado Mismi</span>
+                when clicking at
+                <span class="caption-highlight-dark">Nevado Mismi<sup>[1]</sup></span>).
                 </p>
               </div>
             </article>
@@ -503,7 +503,7 @@
             <div class="results-figure-row">
               <div class="results-figure-item results-figure-wide">
                 <img
-                  src="figures/overall_accuracy.png"
+                  src="figures/user_study/accuracy.jpg"
                   class="paper-figure paper-figure-wide"
                   alt="Task accuracy across Find and Guide, text and visual evidence"
                 />
@@ -521,7 +521,7 @@
             <div class="results-figure-row">
               <div class="results-figure-item results-figure-wide">
                 <img
-                  src="figures/completion_time_plot.png"
+                  src="figures/user_study/completion_time_plot.jpg"
                   class="paper-figure paper-figure-wide"
                   alt="Verification time across Find and Guide, text and visual evidence"
                 />
@@ -537,7 +537,7 @@
             <div class="results-figure-row">
               <div class="results-figure-item results-figure-wide">
                 <img
-                  src="figures/survey_diverging_likert.png"
+                  src="figures/user_study/survey_diverging_likert.jpg"
                   class="paper-figure paper-figure-wide"
                   alt="Post-study Likert ratings for Find and Guide"
                 />

@@ -94,7 +94,7 @@ function animateCount(element) {
   requestAnimationFrame(step);
 }
 
-activateMode("find");
+activateMode("guide");
 
 // Motivation carousel
 const track = document.getElementById("failureCarousel")?.querySelector(".carousel-track");
